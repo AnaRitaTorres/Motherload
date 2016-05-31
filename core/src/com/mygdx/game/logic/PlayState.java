@@ -11,14 +11,12 @@ public class PlayState {
 
     private Map map;
     private World world;
-    private Box2DDebugRenderer b2dr;
 
     public PlayState()
     {
         world = new World(new Vector2(0, -10), true);
-        b2dr = new Box2DDebugRenderer();
+        map = new Map(world);
 
-        map = new Map(world, b2dr);
     }
 
     public World getWorld() {

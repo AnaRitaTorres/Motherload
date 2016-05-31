@@ -6,7 +6,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -26,16 +25,14 @@ public class Map
     private OrthogonalTiledMapRenderer renderer;
 
     private World world;
-    private Box2DDebugRenderer b2dr;
 
-    public Map(World world, Box2DDebugRenderer b2dr)
+    public Map(World world)
     {
         maploader = new TmxMapLoader();
         map = maploader.load("map.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/ Motherload.PPM);
 
         this.world = world;
-        this.b2dr = b2dr;
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -74,7 +71,4 @@ public class Map
         return renderer;
     }
 
-    public Box2DDebugRenderer getB2dr() {
-        return b2dr;
-    }
 }
