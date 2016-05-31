@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
  * Created by Rita on 17/05/2016.
  */
 public class InputHandler
-{
+{/*
     public void inputHandler()
     {
         if(Gdx.input.isKeyPressed(Input.Keys.UP) && driller.b2body.getLinearVelocity().y <= 6.5)
@@ -25,5 +25,5 @@ public class InputHandler
         {
             driller.b2body.applyLinearImpulse(new Vector2(0.8f, 0), driller.b2body.getWorldCenter(), true);
         }
-    }
+    }*/
 }
