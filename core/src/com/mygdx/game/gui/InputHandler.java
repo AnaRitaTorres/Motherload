@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * Created by Rita on 17/05/2016.
  */
-public class InputHandler
+public abstract class InputHandler
 {/*
     public void inputHandler()
     {
@@ -26,4 +26,11 @@ public class InputHandler
             driller.b2body.applyLinearImpulse(new Vector2(0.8f, 0), driller.b2body.getWorldCenter(), true);
         }
     }*/
+
+    public void keyboardHandler()
+    {
+        Input.Keys key;
+        if(Gdx.input.isKeyPressed(Input.Keys.UP))
+            System.out.print("UP\n");
+    }
 }

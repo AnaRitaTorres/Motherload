@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="100" tilewidth="16" tileheight="16" nextobjectid="257">
  <tileset firstgid="1" name="PC Computer - Minecraft - Terrain" tilewidth="16" tileheight="16" tilecount="504" columns="24">
-  <image source="../../../MotherloadDemo/android/assets/PC Computer - Minecraft - Terrain.png" width="384" height="336"/>
+  <image source="PC Computer - Minecraft - Terrain.png" width="384" height="336"/>
  </tileset>
  <tileset firstgid="505" name="tileset_mario" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="924" columns="33">
-  <image source="../../../MotherloadDemo/android/assets/tileset_mario.png" width="594" height="504"/>
+  <image source="tileset_mario.png" width="594" height="504"/>
  </tileset>
  <layer name="background" width="50" height="100">
   <data encoding="base64" compression="zlib">

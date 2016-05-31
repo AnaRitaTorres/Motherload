@@ -9,12 +9,13 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Motherload;
+import com.mygdx.game.logic.Driller;
 import com.mygdx.game.logic.PlayState;
 
 /**
  * Created by Daniel on 31/05/2016.
  */
-public class PlayScreen implements Screen{
+public class PlayScreen extends InputHandler implements Screen{
 
     PlayState play_state;
     Motherload game;
@@ -22,8 +23,7 @@ public class PlayScreen implements Screen{
     private OrthographicCamera gamecam;
     private Viewport gamePort;
     private Box2DDebugRenderer b2dr;
-
-    Texture texture;
+    private Driller driller;
 
     public PlayScreen(PlayState play_state, Motherload game)
     {
@@ -32,14 +32,31 @@ public class PlayScreen implements Screen{
         b2dr = new Box2DDebugRenderer();
 
 
+
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(Motherload.V_WIDTH/ Motherload.PPM, Motherload.V_HEIGHT/ Motherload.PPM, gamecam);
-        gamecam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2, 0);
+
+        System.out.print(gamePort.getWorldHeight());
+        System.out.print('\n');
+        System.out.print(gamePort.getWorldWidth());
+
+        gamecam.position.set(gamePort.getWorldWidth()/2/Motherload.PPM, 1200/Motherload.PPM, 0);
+
+        driller = new Driller(play_state.getWorld(), 40, 1200);
+
     }
 
     public void update(float delta_time) {
+
+
         play_state.getWorld().step(1/60f, 6, 2);
 
+        gamecam.position.x = driller.b2body.getPosition().x;
+        gamecam.position.y = driller.b2body.getPosition().y;
+
+        keyboardHandler();
+
+        driller.update(delta_time);
         gamecam.update();
         play_state.getMap().getRenderer().setView(gamecam);
     }
@@ -52,13 +69,18 @@ public class PlayScreen implements Screen{
     @Override
     public void render(float delta_time) {
         update(delta_time);
-        Gdx.gl.glClearColor(1,0,0,1);
+        Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         play_state.getMap().getRenderer().render();
 
         b2dr.render(play_state.getWorld(), gamecam.combined);
         gamecam.update();
+
+        game.batch.setProjectionMatrix(gamecam.combined);
+        game.batch.begin();
+        driller.draw(game.batch);
+        game.batch.end();
     }
 
     @Override
