@@ -43,8 +43,9 @@ public class Driller extends Sprite implements InputHandler
         shape.setRadius(5/ Motherload.PPM);
         fixtureDef.shape = shape;
         fixtureDef.restitution = 0.1f;
-        fixtureDef.friction = 50f;
+        fixtureDef.friction = 30f;
         b2body.createFixture(fixtureDef);
+        b2body.setLinearDamping(1.5f);
 
 
         driller_tex = new Texture("motherload_sprites/ground_right.png");
@@ -77,6 +78,11 @@ public class Driller extends Sprite implements InputHandler
         setPosition(b2body.getPosition().x - getWidth()/ 2, b2body.getPosition().y - getHeight()/2);
     }
 
+    public float bodySpeed(Body body)
+    {
+        return (float) Math.sqrt(Math.pow(body.getLinearVelocity().x, 2) + Math.pow(body.getLinearVelocity().y, 2));
+    }
+
     public void updateMove(float delta_time)
     {
         Vector2 input = inputHandler();
@@ -91,14 +97,44 @@ public class Driller extends Sprite implements InputHandler
         input.y = input.y - Gdx.graphics.getHeight()/2;
         float angle = (float)Math.atan2(0, 1) - (float)Math.atan2(input.y, input.x);
 
-        System.out.print(angle*180/Math.PI);
-        System.out.print("\n");
+        if(b2body.getLinearVelocity().x > 5)
+        {
 
-        Vector2 impulse = new Vector2(speed*(float)Math.cos(angle), speed*(float)Math.sin(angle));
+        }
+
+        Vector2 impulse_x = new Vector2(speed*(float)Math.cos(angle), 0);
+        Vector2 impulse_y = new Vector2(0, speed*(float)Math.sin(angle));
+
+        //b2body.applyLinearImpulse(impulse,b2body.getWorldCenter(), true);
+
+        if(b2body.getLinearVelocity().x < 5 && b2body.getLinearVelocity().x > 0)
+            b2body.applyLinearImpulse(impulse_x,b2body.getWorldCenter(), true);
+
+        if(b2body.getLinearVelocity().x > -5 && b2body.getLinearVelocity().x <= 0)
+            b2body.applyLinearImpulse(impulse_x,b2body.getWorldCenter(), true);
+
+        if(b2body.getLinearVelocity().y < 5 && b2body.getLinearVelocity().y > 0)
+            b2body.applyLinearImpulse(impulse_y,b2body.getWorldCenter(), true);
+
+        if(b2body.getLinearVelocity().y > -10 && b2body.getLinearVelocity().y <= 0)
+            b2body.applyLinearImpulse(impulse_y,b2body.getWorldCenter(), true);
 
 
-        b2body.applyLinearImpulse(impulse,b2body.getWorldCenter(), true);
+
+        /*
+        if(b2body.getLinearVelocity().x > 5)
+            b2body.setLinearVelocity(new Vector2(5, b2body.getLinearVelocity().y));
+
+        if(b2body.getLinearVelocity().x < -5)
+            b2body.setLinearVelocity(new Vector2(-5, b2body.getLinearVelocity().y));
+
+        if(b2body.getLinearVelocity().y > 5)
+            b2body.setLinearVelocity(new Vector2(b2body.getLinearVelocity().x, 5));
+
+        if(b2body.getLinearVelocity().y < -10)
+            b2body.setLinearVelocity(new Vector2(b2body.getLinearVelocity().x, -5));
+*/
+
     }
-
 
 }
