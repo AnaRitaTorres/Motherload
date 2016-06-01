@@ -15,7 +15,7 @@ import com.mygdx.game.logic.PlayState;
 /**
  * Created by Daniel on 31/05/2016.
  */
-public class PlayScreen extends InputHandler implements Screen{
+public class PlayScreen implements Screen{
 
     PlayState play_state;
     Motherload game;
@@ -54,9 +54,8 @@ public class PlayScreen extends InputHandler implements Screen{
         gamecam.position.x = driller.b2body.getPosition().x;
         gamecam.position.y = driller.b2body.getPosition().y;
 
-        keyboardHandler();
-
-        driller.update(delta_time);
+        driller.updateTexture();
+        driller.updateMove(delta_time);
         gamecam.update();
         play_state.getMap().getRenderer().setView(gamecam);
     }
