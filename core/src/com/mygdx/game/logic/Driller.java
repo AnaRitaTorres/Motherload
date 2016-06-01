@@ -1,5 +1,6 @@
 package com.mygdx.game.logic;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -48,6 +49,7 @@ public class Driller extends Sprite
 
     public void update(float delta_time)
     {
+
         setPosition(b2body.getPosition().x - getWidth()/ 2, b2body.getPosition().y - getHeight()/2);
     }
 
