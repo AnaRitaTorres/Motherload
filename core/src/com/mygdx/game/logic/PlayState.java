@@ -16,6 +16,7 @@ public class PlayState {
     {
         world = new World(new Vector2(0, -10), true);
         map = new Map(world);
+        world.setContactListener(new WorldContactListener());
 
     }
 

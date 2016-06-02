@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Motherload;
@@ -52,6 +53,26 @@ public class Driller extends Sprite implements InputHandler
         simple_sprite = new TextureRegion(driller_tex, 90, 60);
         setBounds(0, 0, 24/Motherload.PPM, 16/Motherload.PPM);
         setRegion(simple_sprite);
+
+        EdgeShape bottom = new EdgeShape();
+        bottom.set(new Vector2(-3 / Motherload.PPM, -5 / Motherload.PPM), new Vector2(3 / Motherload.PPM, -5 / Motherload.PPM));
+        fixtureDef.shape = bottom;
+        fixtureDef.isSensor = true;
+        b2body.createFixture(fixtureDef).setUserData("bottom");
+
+        EdgeShape left = new EdgeShape();
+        left.set(new Vector2(-5 / Motherload.PPM, -3 / Motherload.PPM), new Vector2(-5 / Motherload.PPM, 3 / Motherload.PPM));
+        fixtureDef.shape = left;
+        fixtureDef.isSensor = true;
+        b2body.createFixture(fixtureDef).setUserData("left");
+
+        EdgeShape right = new EdgeShape();
+        right.set(new Vector2(5 / Motherload.PPM, -3 / Motherload.PPM), new Vector2(5 / Motherload.PPM, 3 / Motherload.PPM));
+        fixtureDef.shape = right;
+        fixtureDef.isSensor = true;
+        b2body.createFixture(fixtureDef).setUserData("right");
+
+
     }
 
     public Vector2 inputHandler()
@@ -73,14 +94,8 @@ public class Driller extends Sprite implements InputHandler
         return v;
     }
 
-    public void updateTexture()
-    {
-        setPosition(b2body.getPosition().x - getWidth()/ 2, b2body.getPosition().y - getHeight()/2);
-    }
-
-    public float bodySpeed(Body body)
-    {
-        return (float) Math.sqrt(Math.pow(body.getLinearVelocity().x, 2) + Math.pow(body.getLinearVelocity().y, 2));
+    public void updateTexture() {
+        //setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
     }
 
     public void updateMove(float delta_time)
@@ -88,53 +103,22 @@ public class Driller extends Sprite implements InputHandler
         Vector2 input = inputHandler();
 
         if (input.x == 0 && input.y ==0)
-        {
             return;
-        }
-
 
         input.x = input.x - Gdx.graphics.getWidth()/2;
         input.y = input.y - Gdx.graphics.getHeight()/2;
         float angle = (float)Math.atan2(0, 1) - (float)Math.atan2(input.y, input.x);
 
-        if(b2body.getLinearVelocity().x > 5)
-        {
-
-        }
-
         Vector2 impulse_x = new Vector2(speed*(float)Math.cos(angle), 0);
         Vector2 impulse_y = new Vector2(0, speed*(float)Math.sin(angle));
 
-        //b2body.applyLinearImpulse(impulse,b2body.getWorldCenter(), true);
+        Vector2 linear_velocity = b2body.getLinearVelocity();
 
-        if(b2body.getLinearVelocity().x < 5 && b2body.getLinearVelocity().x > 0)
+        if(linear_velocity.x < 5 && linear_velocity.x > -5)
             b2body.applyLinearImpulse(impulse_x,b2body.getWorldCenter(), true);
 
-        if(b2body.getLinearVelocity().x > -5 && b2body.getLinearVelocity().x <= 0)
-            b2body.applyLinearImpulse(impulse_x,b2body.getWorldCenter(), true);
-
-        if(b2body.getLinearVelocity().y < 5 && b2body.getLinearVelocity().y > 0)
+        if(linear_velocity.y < 5 && linear_velocity.y > -10)
             b2body.applyLinearImpulse(impulse_y,b2body.getWorldCenter(), true);
-
-        if(b2body.getLinearVelocity().y > -10 && b2body.getLinearVelocity().y <= 0)
-            b2body.applyLinearImpulse(impulse_y,b2body.getWorldCenter(), true);
-
-
-
-        /*
-        if(b2body.getLinearVelocity().x > 5)
-            b2body.setLinearVelocity(new Vector2(5, b2body.getLinearVelocity().y));
-
-        if(b2body.getLinearVelocity().x < -5)
-            b2body.setLinearVelocity(new Vector2(-5, b2body.getLinearVelocity().y));
-
-        if(b2body.getLinearVelocity().y > 5)
-            b2body.setLinearVelocity(new Vector2(b2body.getLinearVelocity().x, 5));
-
-        if(b2body.getLinearVelocity().y < -10)
-            b2body.setLinearVelocity(new Vector2(b2body.getLinearVelocity().x, -5));
-*/
 
     }
-
 }
