@@ -92,7 +92,7 @@ public class WorldContactListener implements ContactListener {
 
             if(object.getUserData() instanceof Mineral)
             {
-                if(play_state.left_contact == object.getUserData() && play_state.bottom_contact != null)
+                if(play_state.left_contact == object.getUserData())
                     play_state.left_contact = null;
                 return;
             }
@@ -105,7 +105,7 @@ public class WorldContactListener implements ContactListener {
 
             if(object.getUserData() instanceof Mineral)
             {
-                if(play_state.right_contact == object.getUserData() && play_state.bottom_contact != null)
+                if(play_state.right_contact == object.getUserData())
                     play_state.right_contact = null;
                 return;
             }

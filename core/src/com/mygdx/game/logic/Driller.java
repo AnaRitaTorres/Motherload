@@ -9,7 +9,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Motherload;
@@ -132,7 +131,7 @@ public class Driller extends Sprite implements InputHandler
 
         if(angle > -10*Math.PI/180 && angle < 10*Math.PI/180)
             if(b2body.getLinearVelocity().x == 0 && b2body.getLinearVelocity().y == 0 )
-                if(play_state.right_contact != null)
+                if(play_state.right_contact != null && play_state.bottom_contact != null)
                 {
                     Gdx.app.log("right", "");
                     play_state.right_contact.drill();
@@ -140,7 +139,7 @@ public class Driller extends Sprite implements InputHandler
 
         if(angle > 170*Math.PI/180 || angle < -170*Math.PI/180)
             if(b2body.getLinearVelocity().x == 0 && b2body.getLinearVelocity().y == 0 )
-                if(play_state.left_contact != null)
+                if(play_state.left_contact != null && play_state.bottom_contact != null)
                 {
                     Gdx.app.log("left", "");
                     play_state.left_contact.drill();

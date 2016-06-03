@@ -19,10 +19,10 @@ import com.mygdx.game.Motherload;
  */
 public abstract class Mineral {
 
-    private int weight;
-    private int value;
-    private int points;
-    private MineralType mineral_type;
+    protected int weight;
+    protected int value;
+    protected int points;
+    protected MineralType mineral_type;
 
     protected World world;
     protected Rectangle bounds;
@@ -30,10 +30,11 @@ public abstract class Mineral {
     protected MapObject object;
     protected Fixture fixture;
     protected Map map;
+    protected PlayState play_state;
 
 
 
-    public Mineral(Map map, MapObject object, int weight, int value, int points, MineralType mineral_type) {
+    public Mineral(PlayState play_state, MapObject object, int weight, int value, int points, MineralType mineral_type) {
         this.weight = weight;
         this.value = value;
         this.points = points;
@@ -42,7 +43,8 @@ public abstract class Mineral {
         this.object = object;
         this.world = map.getWorld();
         this.bounds = ((RectangleMapObject) object).getRectangle();
-        this.map = map;
+        this.map = play_state.getMap();
+        this.play_state = play_state;
 
 
         BodyDef bdef = new BodyDef();
@@ -61,7 +63,7 @@ public abstract class Mineral {
 
     public abstract void drill();
     
-    public void setCatgoryFilter(short filterBit)
+    public void setCategoryFilter(short filterBit)
     {
         Filter filter = new Filter();
         filter.categoryBits = filterBit;

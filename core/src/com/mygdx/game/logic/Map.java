@@ -29,13 +29,13 @@ public class Map
 
     private World world;
 
-    public Map(World world)
+    public Map(PlayState play_state)
     {
         maploader = new TmxMapLoader();
         map = maploader.load("map.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/ Motherload.PPM);
 
-        this.world = world;
+        this.world = play_state.getWorld();
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -43,7 +43,7 @@ public class Map
         Body body;
 
         for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            new Dirt(this, object);
+            new Dirt(play_state, object);
         }
 
         for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){

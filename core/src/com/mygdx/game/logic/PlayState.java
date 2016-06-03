@@ -22,7 +22,7 @@ public class PlayState {
     public PlayState()
     {
         world = new World(new Vector2(0, -10), true);
-        map = new Map(world);
+        map = new Map(this);
         world.setContactListener(new WorldContactListener(this));
 
     }
