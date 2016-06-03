@@ -16,6 +16,14 @@ public class Motherload extends Game
 	public static final int V_WIDTH = 400/2;
 	public static final int V_HEIGHT = 500/2;
 	public static final float PPM = 16;
+
+	//collision mask bits
+	public static final short DEFAULT_BIT = 1;
+	public static final short DRILLER_BIT = 2;
+	public static final short ROCK_BIT = 4;
+	public static final short MINERAL_BIT = 8;
+	public static final short DESTROYED_BIT = 16;
+
 	public SpriteBatch batch;
 	public PlayState pState;
 	public MenuState mState;

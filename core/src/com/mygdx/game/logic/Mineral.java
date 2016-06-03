@@ -3,9 +3,11 @@ package com.mygdx.game.logic;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -15,7 +17,7 @@ import com.mygdx.game.Motherload;
 /**
  * Created by Rita on 14/05/2016.
  */
-public class Mineral {
+public abstract class Mineral {
 
     private int weight;
     private int value;
@@ -27,6 +29,7 @@ public class Mineral {
     protected Body body;
     protected MapObject object;
     protected Fixture fixture;
+    protected Map map;
 
 
 
@@ -39,6 +42,7 @@ public class Mineral {
         this.object = object;
         this.world = map.getWorld();
         this.bounds = ((RectangleMapObject) object).getRectangle();
+        this.map = map;
 
 
         BodyDef bdef = new BodyDef();
@@ -53,6 +57,24 @@ public class Mineral {
         shape.setAsBox(bounds.getWidth() / 2 / Motherload.PPM, bounds.getHeight() / 2 / Motherload.PPM);
         fdef.shape = shape;
         fixture = body.createFixture(fdef);
+    }
+
+    public abstract void drill();
+    
+    public void setCatgoryFilter(short filterBit)
+    {
+        Filter filter = new Filter();
+        filter.categoryBits = filterBit;
+        fixture.setFilterData(filter);
+    }
+
+    public TiledMapTileLayer.Cell getCell()
+    {
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getMap().getLayers().get(1);
+        TiledMapTileLayer.Cell cell = layer.getCell((int) (body.getPosition().x * Motherload.PPM / 16),
+                (int) (body.getPosition().y * Motherload.PPM / 16));
+        return cell;
+
     }
 
 

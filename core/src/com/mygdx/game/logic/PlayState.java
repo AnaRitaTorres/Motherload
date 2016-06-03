@@ -12,11 +12,18 @@ public class PlayState {
     private Map map;
     private World world;
 
+
+    public Mineral bottom_contact = null;
+    public Mineral left_contact = null;
+    public Mineral right_contact = null;
+
+    public int score = 0;
+
     public PlayState()
     {
         world = new World(new Vector2(0, -10), true);
         map = new Map(world);
-        world.setContactListener(new WorldContactListener());
+        world.setContactListener(new WorldContactListener(this));
 
     }
 

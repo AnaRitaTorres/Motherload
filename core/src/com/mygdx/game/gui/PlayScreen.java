@@ -36,13 +36,9 @@ public class PlayScreen implements Screen{
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(Motherload.V_WIDTH/ Motherload.PPM, Motherload.V_HEIGHT/ Motherload.PPM, gamecam);
 
-        System.out.print(gamePort.getWorldHeight());
-        System.out.print('\n');
-        System.out.print(gamePort.getWorldWidth());
-
         gamecam.position.set(gamePort.getWorldWidth()/2/Motherload.PPM, 1200/Motherload.PPM, 0);
 
-        driller = new Driller(play_state.getWorld(), 40, 1200);
+        driller = new Driller(play_state, 40, 1200);
 
     }
 
@@ -58,6 +54,7 @@ public class PlayScreen implements Screen{
         driller.updateMove(delta_time);
         gamecam.update();
         play_state.getMap().getRenderer().setView(gamecam);
+
     }
 
     @Override
