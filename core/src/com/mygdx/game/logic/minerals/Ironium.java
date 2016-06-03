@@ -10,8 +10,9 @@ import com.mygdx.game.logic.MineralType;
  */
 public class Ironium extends Mineral
 {
-    public Ironium(Map map, MapObject object, int weight, int value, int points, MineralType mineral_type) {
-        super(map, object, weight, value, points, mineral_type);
+    public Ironium(Map map, MapObject object)
+    {
+        super(map, object, 10, 30, 150, MineralType.IRONIUM);
     }
 
     @Override

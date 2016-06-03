@@ -10,8 +10,9 @@ import com.mygdx.game.logic.MineralType;
  */
 public class Platinium extends Mineral
 {
-    public Platinium(Map map, MapObject object, int weight, int value, int points, MineralType mineral_type) {
-        super(map, object, weight, value, points, mineral_type);
+    public Platinium(Map map, MapObject object)
+    {
+        super(map, object, 30, 750, 3750, MineralType.PLATINIUM);
     }
 
     @Override

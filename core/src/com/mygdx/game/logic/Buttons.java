@@ -10,8 +10,6 @@ import com.mygdx.game.Motherload;
  */
 public class Buttons
 {
-
-
         private Texture buttonTex;
         private Vector2 coordinates;
         private float width,height;

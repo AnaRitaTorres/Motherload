@@ -10,9 +10,9 @@ import com.mygdx.game.logic.MineralType;
  */
 public class Ruby extends Mineral
 {
-    public Ruby(Map map, MapObject object, int weight, int value, int points, MineralType mineral_type)
+    public Ruby(Map map, MapObject object)
     {
-        super(map, object, weight, value, points, mineral_type);
+        super(map, object,80, 20000,0, MineralType.RUBY);
     }
 
     @Override

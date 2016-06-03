@@ -10,8 +10,9 @@ import com.mygdx.game.logic.MineralType;
  */
 public class Goldium extends Mineral
 {
-    public Goldium(Map map, MapObject object, int weight, int value, int points, MineralType mineral_type) {
-        super(map, object, weight, value, points, mineral_type);
+    public Goldium(Map map, MapObject object)
+    {
+        super(map, object, 20, 250,1250, MineralType.GOLDIUM);
     }
 
     @Override
