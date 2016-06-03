@@ -11,9 +11,9 @@ import com.mygdx.game.logic.PlayState;
  */
 public class Einsteinium extends Mineral
 {
-    public Einsteinium(PlayState play_state, MapObject object)
+    public Einsteinium(PlayState play_state, Map map, MapObject object)
     {
-        super(play_state, object, 40, 2000, 10000, MineralType.EINSTEINIUM);
+        super(play_state, map, object, 40, 2000, 10000, MineralType.EINSTEINIUM);
     }
 
     @Override

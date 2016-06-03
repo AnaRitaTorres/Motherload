@@ -34,17 +34,17 @@ public abstract class Mineral {
 
 
 
-    public Mineral(PlayState play_state, MapObject object, int weight, int value, int points, MineralType mineral_type) {
+    public Mineral(PlayState play_state, Map map, MapObject object, int weight, int value, int points, MineralType mineral_type) {
         this.weight = weight;
         this.value = value;
         this.points = points;
         this.mineral_type = mineral_type;
 
-        this.object = object;
-        this.world = map.getWorld();
-        this.bounds = ((RectangleMapObject) object).getRectangle();
-        this.map = play_state.getMap();
         this.play_state = play_state;
+        this.map = map;
+        this.world = play_state.getWorld();
+        this.object = object;
+        this.bounds = ((RectangleMapObject) object).getRectangle();
 
 
         BodyDef bdef = new BodyDef();

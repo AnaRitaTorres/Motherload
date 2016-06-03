@@ -11,9 +11,9 @@ import com.mygdx.game.logic.PlayState;
  */
 public class Diamond  extends Mineral
 {
-    public Diamond(PlayState play_state, MapObject object)
+    public Diamond(PlayState play_state,Map map, MapObject object)
     {
-        super(play_state, object,80,20000, 0, MineralType.DIAMOND);
+        super(play_state, map, object,80,20000, 0, MineralType.DIAMOND);
     }
 
     @Override

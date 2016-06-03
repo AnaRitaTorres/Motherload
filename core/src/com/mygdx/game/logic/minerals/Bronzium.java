@@ -11,8 +11,8 @@ import com.mygdx.game.logic.PlayState;
  */
 public class Bronzium extends Mineral
 {
-    public Bronzium(PlayState play_state, MapObject object) {
-        super(play_state, object, 10, 30, 150, MineralType.BRONZIUM);
+    public Bronzium(PlayState play_state, Map map, MapObject object) {
+        super(play_state, map, object, 10, 30, 150, MineralType.BRONZIUM);
     }
 
     @Override

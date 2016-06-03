@@ -13,15 +13,15 @@ import com.mygdx.game.logic.PlayState;
  */
 public class Dirt extends Mineral {
 
-    public Dirt(PlayState play_state, MapObject object) {
-        super(play_state, object, 1, 0, 25, MineralType.DIRT);
+    public Dirt(PlayState play_state,Map map, MapObject object) {
+        super(play_state, map, object, 1, 0, 25, MineralType.DIRT);
         fixture.setUserData(this);
         setCategoryFilter(Motherload.MINERAL_BIT);
     }
 
     @Override
     public void drill() {
-        Gdx.app.log("Dirt", "Collision");
+        Gdx.app.log("Iron", "Collision");
 
 
 

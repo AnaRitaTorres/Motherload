@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.mygdx.game.logic.Map;
 import com.mygdx.game.logic.Mineral;
 import com.mygdx.game.logic.MineralType;
+import com.mygdx.game.logic.PlayState;
 
 /**
  * Created by Rita on 03/06/2016.
@@ -11,9 +12,9 @@ import com.mygdx.game.logic.MineralType;
 public class Silverium extends Mineral
 {
 
-    public Silverium(Map map, MapObject object)
+    public Silverium(PlayState play_state, Map map, MapObject object)
     {
-        super(map, object, 10,100, 500, MineralType.SILVERIUM);
+        super(play_state, map, object, 10,100, 500, MineralType.SILVERIUM);
     }
 
     @Override

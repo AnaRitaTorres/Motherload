@@ -8,12 +8,12 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Motherload;
 import com.mygdx.game.logic.minerals.Dirt;
+import com.mygdx.game.logic.minerals.Ironium;
 
 /**
  * Created by Rita on 17/05/2016.
@@ -43,10 +43,15 @@ public class Map
         Body body;
 
         for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            new Dirt(play_state, object);
+            new Dirt(play_state, this,  object);
         }
 
         for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
+            new Ironium(play_state, this,  object);
+
+        }
+
+        for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect =((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;

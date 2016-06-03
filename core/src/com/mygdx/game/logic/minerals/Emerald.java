@@ -12,9 +12,9 @@ import com.mygdx.game.logic.PlayState;
 public class Emerald extends Mineral
 {
 
-    public Emerald(PlayState play_state, MapObject object)
+    public Emerald(PlayState play_state,Map map, MapObject object)
     {
-        super(play_state, object, 40, 5000, 25000, MineralType.EMERALD);
+        super(play_state, map, object, 40, 5000, 25000, MineralType.EMERALD);
     }
 
     @Override
