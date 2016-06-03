@@ -17,8 +17,11 @@ public class Buttons
         private float width,height;
 
 
+    public Vector2 getCoordinates() {
+        return coordinates;
+    }
 
-        public Buttons (String texture, float x, float y)
+    public Buttons (String texture, float x, float y)
         {
             buttonTex = new Texture(texture);
             coordinates = new Vector2(x,y);
@@ -28,9 +31,9 @@ public class Buttons
 
         public boolean Touched(float x, float y)
         {
-            double graphical_y = Motherload.V_HEIGHT - y - height;
+            float graphY = Gdx.graphics.getHeight() - y - height;
 
-            if(x > Math.abs(coordinates.x) && x < Math.abs(coordinates.x + width) && graphical_y < Math.abs(coordinates.y) && graphical_y > Math.abs(coordinates.y - height))
+            if(x > Math.abs(coordinates.x) && x < Math.abs(coordinates.x + width) && graphY < Math.abs(coordinates.y) && graphY > Math.abs(coordinates.y - height))
             {
                 return true;
             }
