@@ -4,15 +4,16 @@ import com.badlogic.gdx.maps.MapObject;
 import com.mygdx.game.logic.Map;
 import com.mygdx.game.logic.Mineral;
 import com.mygdx.game.logic.MineralType;
+import com.mygdx.game.logic.PlayState;
 
 /**
  * Created by Rita on 03/06/2016.
  */
 public class Diamond  extends Mineral
 {
-    public Diamond(Map map, MapObject object)
+    public Diamond(PlayState play_state, MapObject object)
     {
-        super(map, object,80,20000, 0, MineralType.DIAMOND);
+        super(play_state, object,80,20000, 0, MineralType.DIAMOND);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.mygdx.game.logic.Map;
 import com.mygdx.game.logic.Mineral;
 import com.mygdx.game.logic.MineralType;
+import com.mygdx.game.logic.PlayState;
 
 /**
  * Created by Rita on 03/06/2016.
@@ -11,9 +12,9 @@ import com.mygdx.game.logic.MineralType;
 public class Emerald extends Mineral
 {
 
-    public Emerald(Map map, MapObject object)
+    public Emerald(PlayState play_state, MapObject object)
     {
-        super(map, object, 40, 5000, 25000, MineralType.EMERALD);
+        super(play_state, object, 40, 5000, 25000, MineralType.EMERALD);
     }
 
     @Override
