@@ -30,6 +30,13 @@ public class Driller extends Sprite implements InputHandler
     private int speed;
     private ArrayList<Mineral> minerals;
     private int capacity;
+    private int health;
+    private int max_health;
+    private float fuel;
+    private int max_fuel;
+
+
+    private float last_vertical_velocity;
 
 
     public Driller(PlayState play_state, int x, int y)
@@ -38,8 +45,13 @@ public class Driller extends Sprite implements InputHandler
         this.world = play_state.getWorld();
         defineDriller(x, y);
         this.speed = 1;
-        this.capacity = 10;
+        this.capacity = 5;
+        this.health = 100;
         this.minerals = new ArrayList<Mineral>();
+        this.last_vertical_velocity = 0;
+        this.max_health = 100;
+        this.max_fuel = 100;
+        this.fuel = 50;
     }
 
     public void defineDriller(int x, int y)
@@ -110,7 +122,7 @@ public class Driller extends Sprite implements InputHandler
     }
 
     public void updateTexture() {
-        //setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
     }
 
 
@@ -124,10 +136,8 @@ public class Driller extends Sprite implements InputHandler
 
         input.x = input.x - Gdx.graphics.getWidth()/2;
         input.y = input.y - Gdx.graphics.getHeight()/2;
-        float angle = (float)Math.atan2(0, 1) - (float)Math.atan2(input.y, input.x);
 
-        System.out.print(angle*180/Math.PI);
-        System.out.print("\n");
+        float angle = (float)Math.atan2(0, 1) - (float)Math.atan2(input.y, input.x);
 
         if(angle > -100*Math.PI/180 && angle < -80*Math.PI/180)
             if(b2body.getLinearVelocity().x == 0 && b2body.getLinearVelocity().y == 0 )
@@ -135,6 +145,7 @@ public class Driller extends Sprite implements InputHandler
                 {
                     Gdx.app.log("bottom", "");
                     play_state.bottom_contact.drill();
+                    decreaseFuel();
                 }
 
         if(angle > -10*Math.PI/180 && angle < 10*Math.PI/180)
@@ -143,6 +154,7 @@ public class Driller extends Sprite implements InputHandler
                 {
                     Gdx.app.log("right", "");
                     play_state.right_contact.drill();
+                    decreaseFuel();
                 }
 
         if(angle > 170*Math.PI/180 || angle < -170*Math.PI/180)
@@ -151,6 +163,7 @@ public class Driller extends Sprite implements InputHandler
                 {
                     Gdx.app.log("left", "");
                     play_state.left_contact.drill();
+                    decreaseFuel();
                 }
 
 
@@ -162,7 +175,7 @@ public class Driller extends Sprite implements InputHandler
         if(linear_velocity.x < 5 && linear_velocity.x > -5)
             b2body.applyLinearImpulse(impulse_x,b2body.getWorldCenter(), true);
 
-        if(linear_velocity.y < 5 && linear_velocity.y > -10)
+        if(linear_velocity.y < 5 && linear_velocity.y > -10 && impulse_y.y > 0f)
             b2body.applyLinearImpulse(impulse_y,b2body.getWorldCenter(), true);
 
     }
@@ -176,5 +189,63 @@ public class Driller extends Sprite implements InputHandler
         System.out.print("\n");
     }
 
+    public void updateHealth()
+    {
+        float current_vertical_velocity = b2body.getLinearVelocity().y;
+        float delta_vy = last_vertical_velocity - current_vertical_velocity;
 
+
+        if(delta_vy < -6) {
+            health = health - 30;
+
+            if(health < 0)
+                health = 0;
+
+            System.out.print("health:");
+            System.out.print(health);
+            System.out.print("\n");
+
+
+        }
+        last_vertical_velocity = current_vertical_velocity;
+
+    }
+
+    public void decreaseHealth(int lost_health)
+    {
+        health = health - lost_health;
+
+        if(health < 0)
+            health = 0;
+    }
+
+    public void decreaseFuel()
+    {
+        fuel = fuel - 0.1f;
+    }
+
+
+    public int getMax_fuel() {
+        return max_fuel;
+    }
+
+    public float getFuel() {
+        return fuel;
+    }
+
+    public int getMax_health() {
+        return max_health;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public ArrayList<Mineral> getMinerals() {
+        return minerals;
+    }
 }

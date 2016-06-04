@@ -24,6 +24,7 @@ public class PlayScreen implements Screen{
     private Viewport gamePort;
     private Box2DDebugRenderer b2dr;
     private Driller driller;
+    private Hud hud;
 
     public PlayScreen(PlayState play_state, Motherload game)
     {
@@ -40,6 +41,8 @@ public class PlayScreen implements Screen{
 
         driller = play_state.getDriller();
 
+        this.hud = new Hud(play_state, game.batch);
+
     }
 
     public void update(float delta_time) {
@@ -50,10 +53,17 @@ public class PlayScreen implements Screen{
         gamecam.position.x = driller.b2body.getPosition().x;
         gamecam.position.y = driller.b2body.getPosition().y;
 
+        //update driller status
         driller.updateTexture();
         driller.updateMove(delta_time);
+        driller.updateHealth();
+
         gamecam.update();
         play_state.getMap().getRenderer().setView(gamecam);
+
+        hud.updateHud();
+
+
 
     }
 
@@ -77,6 +87,9 @@ public class PlayScreen implements Screen{
         game.batch.begin();
         driller.draw(game.batch);
         game.batch.end();
+
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
     }
 
     @Override

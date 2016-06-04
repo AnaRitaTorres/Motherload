@@ -42,4 +42,8 @@ public class PlayState {
     public Driller getDriller() {
         return driller;
     }
+
+    public int getScore() {
+        return score;
+    }
 }

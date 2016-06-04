@@ -21,7 +21,7 @@ public class Dirt extends Mineral {
 
     @Override
     public void drill() {
-        Gdx.app.log("Iron", "Collision");
+        Gdx.app.log("Dirt", "Collision");
 
 
 
