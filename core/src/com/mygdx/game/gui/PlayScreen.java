@@ -38,7 +38,7 @@ public class PlayScreen implements Screen{
 
         gamecam.position.set(gamePort.getWorldWidth()/2/Motherload.PPM, 1200/Motherload.PPM, 0);
 
-        driller = new Driller(play_state, 40, 1200);
+        driller = play_state.getDriller();
 
     }
 

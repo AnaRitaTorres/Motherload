@@ -14,6 +14,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Motherload;
 import com.mygdx.game.gui.InputHandler;
 
+import java.util.ArrayList;
+
 /**
  * Created by Rita on 14/05/2016.
  */
@@ -24,7 +26,11 @@ public class Driller extends Sprite implements InputHandler
     public Body b2body;
     private TextureRegion simple_sprite;
     private Texture driller_tex;
+
     private int speed;
+    private ArrayList<Mineral> minerals;
+    private int capacity;
+
 
     public Driller(PlayState play_state, int x, int y)
     {
@@ -32,6 +38,8 @@ public class Driller extends Sprite implements InputHandler
         this.world = play_state.getWorld();
         defineDriller(x, y);
         this.speed = 1;
+        this.capacity = 10;
+        this.minerals = new ArrayList<Mineral>();
     }
 
     public void defineDriller(int x, int y)
@@ -158,4 +166,15 @@ public class Driller extends Sprite implements InputHandler
             b2body.applyLinearImpulse(impulse_y,b2body.getWorldCenter(), true);
 
     }
+
+    public void addMineral(Mineral mineral)
+    {
+        if(minerals.size() < capacity)
+            minerals.add(mineral);
+        System.out.print("minerals count: ");
+        System.out.print(minerals.size());
+        System.out.print("\n");
+    }
+
+
 }

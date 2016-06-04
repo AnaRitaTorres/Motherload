@@ -11,6 +11,7 @@ public class PlayState {
 
     private Map map;
     private World world;
+    private Driller driller;
 
 
     public Mineral bottom_contact = null;
@@ -19,11 +20,14 @@ public class PlayState {
 
     public int score = 0;
 
+
     public PlayState()
+
     {
         world = new World(new Vector2(0, -10), true);
         map = new Map(this);
         world.setContactListener(new WorldContactListener(this));
+        this.driller = new Driller(this, 40, 1200);
 
     }
 
@@ -33,5 +37,9 @@ public class PlayState {
 
     public Map getMap() {
         return map;
+    }
+
+    public Driller getDriller() {
+        return driller;
     }
 }
