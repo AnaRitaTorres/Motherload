@@ -5,7 +5,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Motherload;
@@ -33,52 +37,59 @@ public class MenuScreen implements Screen,InputHandler
 
     Buttons playButton,exitButton;
 
+    Rectangle r = new Rectangle();
+    Rectangle r1 = new Rectangle();
+
     public MenuScreen(MenuState menu_state, Motherload game)
     {
         this.menu_state = menu_state;
         this.game = game;
         play_state = new PlayState();
         playButton = new Buttons("play.png",40,230);
-        exitButton = new Buttons ("exit.png",40,160);
+        exitButton = new Buttons ("exit.png",40,130);
+
+        r.set(playButton.getCoordinates().x,playButton.getCoordinates().y,playButton.getWidth(),playButton.getHeight());
+        r1.set(exitButton.getCoordinates().x,exitButton.getCoordinates().y,exitButton.getWidth(),exitButton.getHeight());
 
         background = new Texture("map2.png");
         driller = new Texture("motherload_sprites/ground_right.png");
         title = new Texture("titulo.png");
 
-        /*menuCam = new OrthographicCamera();
-        menuPort = new FitViewport(640,480, menuCam);
-        menuPort.apply(true);*/
+        menuCam = new OrthographicCamera();
+        menuCam.setToOrtho(false,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        menuPort = new FillViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), menuCam);
+        menuPort.apply(true);
 
     }
 
     public void update(float delta_time)
     {
         Vector2 v = inputHandler();
+        Vector3 b = new Vector3(v.x,v.y,0);
 
-            if(playButton.Touched(v.x,v.y))
-            {
-                Gdx.app.log("Mouse Clicked","");
-                game.setScreen(new PlayScreen(play_state, game));
-                dispose();
-            }
+
+        System.out.print(r.getX() + " " + r.getY() + " " + r.getWidth() + "  " + r.getHeight() + "     ");
+
+        if (r.contains(b.x,b.y))
+        {
+            Gdx.app.log("Mouse Clicked", "");
+            game.setScreen(new PlayScreen(play_state, game));
+            dispose();
+
+        }
 
     }
     public Vector2 inputHandler()
     {
-        Vector2 v;
+        Vector2 v = new Vector2();
 
         if (Gdx.input.isTouched())
         {
-            int x,y;
-
-            x = Gdx.input.getX();
-            y = Gdx.input.getY();
-
-            v = new Vector2(x,y);
+            v.set(Gdx.input.getX(),Gdx.input.getY());
+            Vector3 b = new Vector3(v.x,v.y,0);
+            menuCam.unproject(b);
         }
-        else
-            v = new Vector2(0,0);
-
+        else v = new Vector2(-1000,-1000);
         return v;
     }
 
@@ -94,8 +105,8 @@ public class MenuScreen implements Screen,InputHandler
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //menuCam.update();
-        //game.batch.setProjectionMatrix(menuPort.getCamera().combined);
+        menuCam.update();
+        game.batch.setProjectionMatrix(menuCam.combined);
         game.batch.begin();
         game.batch.draw(background, 0, 0);
         game.batch.draw(driller,400,0,driller.getWidth()*2,driller.getHeight()*2);
@@ -104,28 +115,11 @@ public class MenuScreen implements Screen,InputHandler
         game.batch.draw(exitButton.getButtonTex(),exitButton.getCoordinates().x,exitButton.getCoordinates().y, exitButton.getWidth()/1.8f,exitButton.getHeight()/1.8f);
         game.batch.end();
 
-       /* if(inputHandler() != new Vector2(0,0))
-        {
-            Gdx.app.log("Mouse Clicked","");
-        }
-
-        if(playButton.Touched(background.getWidth()/9 + playButton.getWidth(),background.getHeight()/2 +playButton.getHeight()) )
-        {
-            //Gdx.app.log("Mouse Clicked","");
-            game.setScreen(new PlayScreen(play_state, game));
-            dispose();
-        }
-        if (Gdx.input.isTouched())
-        {
-
-            game.setScreen(new PlayScreen(play_state, game));
-            dispose();
-        }*/
     }
 
     @Override
     public void resize(int width, int height) {
-        //menuPort.update(width, height);
+        menuPort.update(width, height);
     }
 
     @Override
