@@ -18,12 +18,15 @@ public class PlayState {
     public Mineral left_contact = null;
     public Mineral right_contact = null;
 
-    public int score = 0;
+    public int score;
+    private int money;
 
 
     public PlayState()
-
     {
+        this.score = 0;
+        this.money = 0;
+
         world = new World(new Vector2(0, -10), true);
         map = new Map(this);
         world.setContactListener(new WorldContactListener(this));
@@ -45,5 +48,9 @@ public class PlayState {
 
     public int getScore() {
         return score;
+    }
+
+    public int getMoney() {
+        return money;
     }
 }

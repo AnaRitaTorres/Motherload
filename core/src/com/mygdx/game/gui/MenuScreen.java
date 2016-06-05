@@ -177,11 +177,13 @@ public class MenuScreen implements Screen
         optionsButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
                 //TODO options screen
+                Gdx.app.log("OPTIONS", "");
             }
         });
 
          exitButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
+                Gdx.app.log("EXIT", "");
                 Gdx.app.exit();
             }
         });
