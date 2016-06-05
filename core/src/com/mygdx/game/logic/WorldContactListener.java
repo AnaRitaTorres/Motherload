@@ -62,6 +62,30 @@ public class WorldContactListener implements ContactListener {
             }
         }
 
+        if(fixA.getUserData() == "driller" || fixB.getUserData() == "driller")
+        {
+            Fixture sensor = fixA.getUserData() == "driller" ? fixA : fixB;
+            Fixture object = sensor == fixA ? fixB : fixA;
+
+            if(object.getUserData() == "gas_station")
+            {
+                play_state.getGas_station().shop(play_state.getDriller());
+                Gdx.app.log("Collision", "Gas Station with driller");
+            }
+        }
+
+        if(fixA.getUserData() == "driller" || fixB.getUserData() == "driller")
+        {
+            Fixture sensor = fixA.getUserData() == "driller" ? fixA : fixB;
+            Fixture object = sensor == fixA ? fixB : fixA;
+
+            if(object.getUserData() == "trade_center")
+            {
+                play_state.getTrade_center().shop(play_state.getDriller());
+                Gdx.app.log("Collision", "Trade Center with driller");
+            }
+        }
+
     }
 
     @Override

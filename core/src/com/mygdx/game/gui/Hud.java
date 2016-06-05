@@ -83,7 +83,7 @@ public class Hud {
     {
         scoreLabel.setText(String.format(" Score: %09d ", play_state.getScore()));
         healthLabel.setText(String.format(" Health: %d/%d ", driller.getHealth(), driller.getMax_health()));
-        fuelLabel.setText(String.format(" Fuel: %d/%d ", (int)driller.getFuel(), driller.getMax_fuel()));
+        fuelLabel.setText(String.format(" Fuel: %d/%d ", (int)Math.ceil(driller.getFuel()), driller.getMax_fuel()));
         capacityLabel.setText(String.format(" Capacity: %d/%d ", driller.getMinerals().size(), driller.getCapacity()));
         moneyLabel.setText(String.format(" Money: %07d ", play_state.getMoney(), label_style));
     }

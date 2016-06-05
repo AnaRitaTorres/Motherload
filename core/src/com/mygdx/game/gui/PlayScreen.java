@@ -58,6 +58,7 @@ public class PlayScreen implements Screen{
         driller.updateTexture();
         driller.updateMove(delta_time);
         driller.updateHealth();
+        driller.updateFuel(delta_time/10);
 
         gamecam.update();
         play_state.getMap().getRenderer().setView(gamecam);

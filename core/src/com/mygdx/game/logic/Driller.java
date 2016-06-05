@@ -70,8 +70,9 @@ public class Driller extends Sprite implements InputHandler
         fixtureDef.shape = shape;
         fixtureDef.restitution = 0.1f;
         fixtureDef.friction = 30f;
-        b2body.createFixture(fixtureDef);
         b2body.setLinearDamping(1.5f);
+
+        b2body.createFixture(fixtureDef).setUserData("driller");
 
 
         driller_tex = new Texture("motherload_sprites/ground_right.png");
@@ -219,6 +220,16 @@ public class Driller extends Sprite implements InputHandler
             health = 0;
     }
 
+    public void updateFuel(float delta_time)
+    {
+        setFuel(getFuel() - delta_time);
+    }
+
+    public void clearMinerals()
+    {
+        minerals.clear();
+    }
+
     public void decreaseFuel()
     {
         fuel = fuel - 0.1f;
@@ -247,5 +258,13 @@ public class Driller extends Sprite implements InputHandler
 
     public ArrayList<Mineral> getMinerals() {
         return minerals;
+    }
+
+    public void setFuel(float fuel) {
+        this.fuel = fuel;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }
