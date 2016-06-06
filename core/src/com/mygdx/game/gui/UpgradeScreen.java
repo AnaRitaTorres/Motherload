@@ -21,46 +21,46 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Motherload;
 import com.mygdx.game.logic.PlayState;
+import com.mygdx.game.logic.UpgradeStore;
 
 /**
  * Created by Daniel on 06/06/2016.
  */
 public class UpgradeScreen implements Screen {
 
-    private static final int BUTTON_WIDTH = 120;
-    private static final int BUTTON_HEIGHT = 60;
+    public static final int BUTTON_WIDTH = 120;
+    public static final int BUTTON_HEIGHT = 60;
 
-    Motherload game;
-    PlayState play_state;
+    private Motherload game;
+    private PlayState play_state;
+    private UpgradeStore store;
 
     private OrthographicCamera storeCam;
     private Viewport storePort;
 
-    TextButton upgradeHull;
-    TextButton upgradeFuelTank;
-    TextButton upgradeContainer;
-    TextButton exit;
+    private TextButton upgradeHull;
+    private TextButton upgradeFuelTank;
+    private TextButton upgradeContainer;
+    private TextButton exit;
 
-    Label hull_label;
-    Label cargo_label;
-    Label fuel_label;
+    private Label hull_label;
+    private Label cargo_label;
+    private Label fuel_label;
+
     private Label.LabelStyle label_style;
     private Texture texture_solid;
 
-    private int hull_upgrade_cost = 100;
-    private int fuel_upgrade_cost = 100;
-    private int cargo_upgrade_cost = 100;
+    private Stage stage;
+    private Skin skin;
 
-    Stage stage;
-    Skin skin;
+    private Hud hud;
 
-    Hud hud;
 
-    private Music music;
 
-    public UpgradeScreen(Motherload game, PlayState play_state) {
+    public UpgradeScreen(Motherload game, PlayState play_state, UpgradeStore store) {
         this.game = game;
         this.play_state = play_state;
+        this.store = store;
         this.hud = new Hud(play_state, game.batch);
         create();
         handleInput();
@@ -142,9 +142,9 @@ public class UpgradeScreen implements Screen {
 
     public void updateCosts()
     {
-        cargo_label.setText(String.format(" Cost: $%d ", cargo_upgrade_cost));
-        hull_label.setText(String.format(" Cost: $%d ", hull_upgrade_cost));
-        fuel_label.setText(String.format(" Cost: $%d ", fuel_upgrade_cost));
+        cargo_label.setText(String.format(" Cost: $%d ", store.getCargo_upgrade_cost()));
+        hull_label.setText(String.format(" Cost: $%d ", store.getHull_upgrade_cost()));
+        fuel_label.setText(String.format(" Cost: $%d ", store.getFuel_upgrade_cost()));
     }
 
     @Override
@@ -197,7 +197,7 @@ public class UpgradeScreen implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
-        music.dispose();
+
     }
 
     public void handleInput()
@@ -207,40 +207,31 @@ public class UpgradeScreen implements Screen {
         {
             public void changed (ChangeEvent event, Actor actor)
             {
-                if(play_state.getMoney() >= hull_upgrade_cost) {
-                    play_state.setMoney(play_state.getMoney() -  hull_upgrade_cost);
-                    hull_upgrade_cost += 100;
-                    play_state.getDriller().addMax_health(10);
-                    updateCosts();
-                }
+                store.buyHullUpgrade();
+                updateCosts();
+
             }
         });
 
        upgradeContainer.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
-                if(play_state.getMoney() >= cargo_upgrade_cost) {
-                    play_state.setMoney(play_state.getMoney() - cargo_upgrade_cost);
-                    cargo_upgrade_cost += 100;
-                    play_state.getDriller().addCapacity(5);
-                    updateCosts();
-                }
+                store.buyCargoUpgrades();
+                updateCosts();
+
             }
         });
 
         upgradeFuelTank.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
-                if(play_state.getMoney() >= fuel_upgrade_cost) {
-                    play_state.setMoney(play_state.getMoney() - fuel_upgrade_cost);
-                    fuel_upgrade_cost += 100;
-                    play_state.getDriller().addMax_fuel(10);
-                    updateCosts();
-                }
+                store.buyFuelUpgrades();
+                updateCosts();
+
             }
         });
 
         exit.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
-                game.setScreen(new MenuScreen(game));
+                game.setScreen(new PlayScreen(play_state,game));
             }
         });
     }

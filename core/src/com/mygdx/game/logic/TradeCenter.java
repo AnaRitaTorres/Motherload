@@ -46,19 +46,19 @@ public class TradeCenter
     }
 
 
-        public void shop(Driller driller)
+    public void shop(Driller driller)
+    {
+        int money = 0;
+        ArrayList<Mineral> minerals = driller.getMinerals();
+
+        for(int i = 0; i < minerals.size(); i++)
         {
-            int money = 0;
-            ArrayList<Mineral> minerals = driller.getMinerals();
-
-            for(int i = 0; i < minerals.size(); i++)
-            {
-                money = money + minerals.get(i).value;
-            }
-
-            play_state.setMoney(play_state.getMoney() + money);
-            driller.clearMinerals();
+            money = money + minerals.get(i).value;
         }
+
+        play_state.setMoney(play_state.getMoney() + money);
+        driller.clearMinerals();
+    }
 
 
 

@@ -6,6 +6,8 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.mygdx.game.Motherload;
+import com.mygdx.game.gui.UpgradeScreen;
 
 
 /**
@@ -14,10 +16,12 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 public class WorldContactListener implements ContactListener {
 
     PlayState play_state;
+    Motherload game;
 
-    public WorldContactListener(PlayState play_state)
+    public WorldContactListener(PlayState play_state, Motherload game)
     {
         this.play_state = play_state;
+        this.game = game;
     }
 
 
@@ -83,6 +87,18 @@ public class WorldContactListener implements ContactListener {
             {
                 play_state.getTrade_center().shop(play_state.getDriller());
                 Gdx.app.log("Collision", "Trade Center with driller");
+            }
+        }
+
+        if(fixA.getUserData() == "driller" || fixB.getUserData() == "driller")
+        {
+            Fixture sensor = fixA.getUserData() == "driller" ? fixA : fixB;
+            Fixture object = sensor == fixA ? fixB : fixA;
+
+            if(object.getUserData() == "upgrade_store")
+            {
+                game.setScreen(new UpgradeScreen(game, play_state, play_state.getUpgrade_store()));
+                Gdx.app.log("Collision", "Upgrade Store with driller");
             }
         }
 

@@ -192,13 +192,13 @@ public class MenuScreen implements Screen
         optionsButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
                 //TODO options screen
-                /*music.stop();
+                music.stop();
                 music = Gdx.audio.newMusic(Gdx.files.internal("Rick Astley - Never Gonna Give You Up.mp3"));
                 music.setVolume(0.5f);
                 music.setLooping(true);
                 music.play();
-                Gdx.app.log("OPTIONS", "");*/
-                game.setScreen(new UpgradeScreen(game, game.pState));
+                Gdx.app.log("OPTIONS", "");
+
             }
         });
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gui.MenuScreen;
 import com.mygdx.game.logic.PlayState;
+import com.mygdx.game.logic.UpgradeStore;
 
 public class Motherload extends Game
 {
@@ -23,11 +24,13 @@ public class Motherload extends Game
 	public PlayState pState;
 
 
+
 	@Override
 	public void create ()
 	{
 		batch = new SpriteBatch();
-		pState = new PlayState();
+		pState = new PlayState(this);
+
 		setScreen(new MenuScreen(this));
 	}
 
