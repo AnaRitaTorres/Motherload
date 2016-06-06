@@ -23,8 +23,7 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Motherload;
-import com.mygdx.game.logic.MenuState;
-import com.mygdx.game.logic.PlayState;
+
 
 
 /**
@@ -36,7 +35,7 @@ public class MenuScreen implements Screen
     private static final int BUTTON_WIDTH = 200;
     private static final int BUTTON_HEIGHT = 80;
 
-    MenuState menu_state;
+
     Motherload game;
 
     private OrthographicCamera menuCam;
@@ -53,9 +52,8 @@ public class MenuScreen implements Screen
 
     private Music music;
 
-    public MenuScreen(MenuState menu_state, Motherload game)
+    public MenuScreen(Motherload game)
     {
-        this.menu_state = menu_state;
         this.game = game;
         create();
         handleInput();

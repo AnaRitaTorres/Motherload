@@ -2,13 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.gui.MenuScreen;
-import com.mygdx.game.gui.PlayScreen;
-import com.mygdx.game.logic.MenuState;
 import com.mygdx.game.logic.PlayState;
 
 public class Motherload extends Game
@@ -26,14 +21,14 @@ public class Motherload extends Game
 
 	public SpriteBatch batch;
 	public PlayState pState;
-	public MenuState mState;
+
 
 	@Override
 	public void create ()
 	{
 		batch = new SpriteBatch();
 		pState = new PlayState();
-		setScreen(new MenuScreen(mState, this));
+		setScreen(new MenuScreen(this));
 	}
 
 	@Override
