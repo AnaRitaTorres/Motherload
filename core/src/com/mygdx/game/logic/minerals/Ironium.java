@@ -22,15 +22,10 @@ public class Ironium extends Mineral
 
     @Override
     public void drill() {
-        Gdx.app.log("Ironium", "Collision");
-
         setCategoryFilter(Motherload.DESTROYED_BIT);
         getCell().setTile(null);
 
         play_state.score = play_state.score + points;
-        System.out.print("Score: ");
-        System.out.print(play_state.score);
-        System.out.print("\n");
 
         play_state.getDriller().addMineral(this);
     }

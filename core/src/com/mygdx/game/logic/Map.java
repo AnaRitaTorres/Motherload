@@ -13,8 +13,15 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Motherload;
+import com.mygdx.game.logic.minerals.Bronzium;
+import com.mygdx.game.logic.minerals.Diamond;
 import com.mygdx.game.logic.minerals.Dirt;
+import com.mygdx.game.logic.minerals.Emerald;
+import com.mygdx.game.logic.minerals.Goldium;
 import com.mygdx.game.logic.minerals.Ironium;
+import com.mygdx.game.logic.minerals.Platinium;
+import com.mygdx.game.logic.minerals.Ruby;
+import com.mygdx.game.logic.minerals.Silverium;
 
 /**
  * Created by Rita on 17/05/2016.
@@ -52,11 +59,47 @@ public class Map
 
         }
 
+        for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
+            new Bronzium(play_state, this,  object);
+
+        }
+
+        for(MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
+            new Silverium(play_state, this,  object);
+
+        }
+
+        for(MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)){
+            new Platinium(play_state, this,  object);
+
+        }
+
+        for(MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)){
+            new Emerald(play_state, this,  object);
+
+        }
+
+        for(MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)){
+            new Diamond(play_state, this,  object);
+
+        }
+
+        for(MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)){
+            new Ruby(play_state, this,  object);
+
+        }
+
+        for(MapObject object : map.getLayers().get(11).getObjects().getByType(RectangleMapObject.class)){
+            new Goldium(play_state, this,  object);
+
+        }
+
         for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect =((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
             bdef.position.set((rect.getX() + rect.getWidth() / 2)/ Motherload.PPM, (rect.getY() + rect.getHeight() /2)/ Motherload.PPM);
+
 
             body = world.createBody(bdef);
 

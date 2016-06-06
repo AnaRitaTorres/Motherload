@@ -2,6 +2,7 @@ package com.mygdx.game.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -50,7 +51,9 @@ public class MenuScreen implements Screen
     TextButton optionsButton;
     TextButton exitButton;
 
-     public MenuScreen(MenuState menu_state, Motherload game)
+    private Music music;
+
+    public MenuScreen(MenuState menu_state, Motherload game)
     {
         this.menu_state = menu_state;
         this.game = game;
@@ -113,6 +116,11 @@ public class MenuScreen implements Screen
         exitButton.setPosition(100,0);
         stage.addActor(exitButton);
 
+        this.music = Gdx.audio.newMusic(Gdx.files.internal("Darude - Sandstorm.mp3"));
+        music.setVolume(0.5f);
+        music.setLooping(true);
+        music.play();
+
     }
 
 
@@ -167,6 +175,7 @@ public class MenuScreen implements Screen
     {
         stage.dispose();
         skin.dispose();
+        music.dispose();
     }
 
 
@@ -177,6 +186,7 @@ public class MenuScreen implements Screen
         {
             public void changed (ChangeEvent event, Actor actor)
             {
+                music.stop();
                 game.setScreen(new PlayScreen(game.pState, game));
             }
         });
@@ -184,6 +194,11 @@ public class MenuScreen implements Screen
         optionsButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
                 //TODO options screen
+                music.stop();
+                music = Gdx.audio.newMusic(Gdx.files.internal("Rick Astley - Never Gonna Give You Up.mp3"));
+                music.setVolume(0.5f);
+                music.setLooping(true);
+                music.play();
                 Gdx.app.log("OPTIONS", "");
             }
         });

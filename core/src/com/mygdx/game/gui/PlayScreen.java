@@ -3,6 +3,7 @@ package com.mygdx.game.gui;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -28,6 +29,8 @@ public class PlayScreen implements Screen{
     private Driller driller;
     private Hud hud;
 
+    private Music music;
+
     public PlayScreen(PlayState play_state, Motherload game)
     {
         this.game = game;
@@ -44,6 +47,11 @@ public class PlayScreen implements Screen{
         driller = play_state.getDriller();
 
         this.hud = new Hud(play_state, game.batch);
+
+        this.music = Gdx.audio.newMusic(Gdx.files.internal("Motherload OST - Heavy Industry HQ.mp3"));
+        music.setVolume(0.5f);
+        music.setLooping(true);
+        music.play();
 
     }
 
@@ -118,6 +126,6 @@ public class PlayScreen implements Screen{
 
     @Override
     public void dispose() {
-
+        music.dispose();
     }
 }

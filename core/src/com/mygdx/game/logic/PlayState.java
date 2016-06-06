@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.World;
 /**
  * Created by Rita on 14/05/2016.
  */
-public class PlayState {
+public class PlayState extends State{
 
     private Map map;
     private World world;

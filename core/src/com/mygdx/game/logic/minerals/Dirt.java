@@ -23,14 +23,9 @@ public class Dirt extends Mineral {
     public void drill() {
         Gdx.app.log("Dirt", "Collision");
 
-
-
         setCategoryFilter(Motherload.DESTROYED_BIT);
         getCell().setTile(null);
 
         play_state.score = play_state.score + points;
-        System.out.print("Score: ");
-        System.out.print(play_state.score);
-        System.out.print("\n");
     }
 }
