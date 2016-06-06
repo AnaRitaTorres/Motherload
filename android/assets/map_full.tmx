@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="100" tilewidth="16" tileheight="16" nextobjectid="4246">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="100" tilewidth="16" tileheight="16" nextobjectid="4260">
  <tileset firstgid="1" name="PC Computer - Minecraft - Terrain" tilewidth="16" tileheight="16" tilecount="504" columns="24">
   <image source="PC Computer - Minecraft - Terrain.png" width="384" height="336"/>
  </tileset>
@@ -15,6 +15,9 @@
  <tileset firstgid="1488" name="minerals" tilewidth="16" tileheight="16" tilecount="9" columns="3">
   <image source="minerals.png" width="48" height="48"/>
  </tileset>
+ <tileset firstgid="1497" name="upgrade_store" tilewidth="16" tileheight="16" tilecount="28" columns="7">
+  <image source="upgrade_shop.png" width="112" height="64"/>
+ </tileset>
  <layer name="background" width="50" height="100">
   <data encoding="base64" compression="zlib">
    eJztw4EJAAAEADDK1d72gDtoq01FjKqqqqqq53aqqqqqqqqqqqqqqqqqqt8uOg0JLQ==
@@ -22,7 +25,7 @@
  </layer>
  <layer name="graphics" width="50" height="100">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup name="ground">
@@ -39,26 +42,7 @@
   <object id="55" x="288" y="448" width="16" height="16"/>
   <object id="56" x="304" y="448" width="16" height="16"/>
   <object id="58" x="320" y="448" width="16" height="16"/>
-  <object id="59" x="336" y="448" width="16" height="16"/>
-  <object id="60" x="352" y="448" width="16" height="16"/>
-  <object id="61" x="368" y="448" width="16" height="16"/>
-  <object id="62" x="384" y="448" width="16" height="16"/>
-  <object id="64" x="400" y="448" width="16" height="16"/>
-  <object id="65" x="416" y="448" width="16" height="16"/>
-  <object id="66" x="432" y="448" width="16" height="16"/>
-  <object id="67" x="448" y="448" width="16" height="16"/>
-  <object id="68" x="464" y="448" width="16" height="16"/>
-  <object id="69" x="480" y="448" width="16" height="16"/>
   <object id="80" x="640" y="448" width="16" height="16"/>
-  <object id="81" x="656" y="448" width="16" height="16"/>
-  <object id="82" x="688" y="448" width="16" height="16"/>
-  <object id="83" x="672" y="448" width="16" height="16"/>
-  <object id="84" x="704" y="448" width="16" height="16"/>
-  <object id="85" x="720" y="448" width="16" height="16"/>
-  <object id="87" x="736" y="448" width="16" height="16"/>
-  <object id="105" x="752" y="448" width="16" height="16"/>
-  <object id="106" x="768" y="448" width="16" height="16"/>
-  <object id="107" x="784" y="448" width="16" height="16"/>
   <object id="109" x="0" y="464" width="16" height="16"/>
   <object id="110" x="16" y="464" width="16" height="16"/>
   <object id="111" x="32" y="464" width="16" height="16"/>
@@ -3351,6 +3335,16 @@
   <object id="3950" x="432" y="512" width="16" height="16"/>
   <object id="3951" x="400" y="496" width="16" height="16"/>
   <object id="3952" x="416" y="464" width="16" height="16"/>
+  <object id="4250" x="336" y="448" width="16" height="16"/>
+  <object id="4251" x="352" y="448" width="16" height="16"/>
+  <object id="4252" x="512" y="448" width="16" height="16"/>
+  <object id="4253" x="528" y="448" width="16" height="16"/>
+  <object id="4254" x="544" y="448" width="16" height="16"/>
+  <object id="4255" x="560" y="448" width="16" height="16"/>
+  <object id="4256" x="576" y="448" width="16" height="16"/>
+  <object id="4257" x="592" y="448" width="16" height="16"/>
+  <object id="4258" x="608" y="448" width="16" height="16"/>
+  <object id="4259" x="624" y="448" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="iron">
   <object id="3961" x="80" y="496" width="16" height="16"/>
@@ -3411,7 +3405,8 @@
   <object id="3938" x="800" y="0" height="1600"/>
   <object id="3939" x="0" y="1600" width="800"/>
   <object id="3942" x="96" y="448" width="128" height="16"/>
-  <object id="3943" x="496" y="448" width="144" height="16"/>
+  <object id="4247" x="656" y="448" width="144" height="16"/>
+  <object id="4249" x="368" y="448" width="144" height="16"/>
  </objectgroup>
  <objectgroup name="Bronzium">
   <object id="4013" x="32" y="480" width="16" height="16"/>

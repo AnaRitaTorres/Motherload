@@ -39,8 +39,8 @@ public class PlayState{
         world.setContactListener(new WorldContactListener(this, game));
         this.driller = new Driller(this, 40, 1200);
         this.gas_station = new GasStation(this, 9, -27);
-        this.trade_center = new TradeCenter(this, 34, -27);
-        this.upgrade_store = new UpgradeStore(this, 45, -27);
+        this.trade_center = new TradeCenter(this, 26, -27);
+        this.upgrade_store = new UpgradeStore(this, 46, -27);
 
     }
 
