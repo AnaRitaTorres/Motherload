@@ -1,5 +1,6 @@
 package com.mygdx.game.gui;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Cursor;
@@ -80,7 +81,10 @@ public class PlayScreen implements Screen{
 
         play_state.getMap().getRenderer().render();
 
-        b2dr.render(play_state.getWorld(), gamecam.combined);
+
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop)
+            b2dr.render(play_state.getWorld(), gamecam.combined);
+
         gamecam.update();
 
         game.batch.setProjectionMatrix(gamecam.combined);

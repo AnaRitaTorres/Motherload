@@ -50,6 +50,7 @@ public abstract class Mineral {
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
+        fdef.filter.maskBits = Motherload.DRILLER_BIT;
 
         bdef.type = BodyDef.BodyType.StaticBody;
         bdef.position.set((bounds.getX() + bounds.getWidth() / 2) / Motherload.PPM, (bounds.getY() + bounds.getHeight() / 2) / Motherload.PPM);

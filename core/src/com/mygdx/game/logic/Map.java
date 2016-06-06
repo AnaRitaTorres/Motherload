@@ -33,7 +33,7 @@ public class Map
     public Map(PlayState play_state)
     {
         maploader = new TmxMapLoader();
-        map = maploader.load("map.tmx");
+        map = maploader.load("map_full.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/ Motherload.PPM);
 
         this.world = play_state.getWorld();

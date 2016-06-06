@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="100" tilewidth="16" tileheight="16" nextobjectid="3946">
+ <tileset firstgid="1" name="PC Computer - Minecraft - Terrain" tilewidth="16" tileheight="16" tilecount="504" columns="24">
+  <image source="PC Computer - Minecraft - Terrain.png" width="384" height="336"/>
+ </tileset>
+ <tileset firstgid="505" name="tileset_mario" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="924" columns="33">
+  <image source="tileset_mario.png" width="594" height="504"/>
+ </tileset>
+ <layer name="background" width="50" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztw4EJAAAEADDK1d72gDtoq01FjKqqqqqq53aqqqqqqqqqqqqqqqqqqt8uOg0JLQ==
+  </data>
+ </layer>
+ <layer name="graphics" width="50" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0EEKgCAQQFGhLuE1ukj3v02bVpJRSejI+/DIjTFjSpIkvW+fhCRJkjR6+RS5XOg9S8vdEfZonSFXzi1zvP1PeffLHL33uNrh61tcnZ+2TmL5yVb5ziDiLlvlHMXdzBH3iTw3AAAAAAAAAAAAAAAAzO4Aycg/YA==
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object id="36" x="0" y="448" width="16" height="16"/>
+  <object id="37" x="16" y="448" width="16" height="16"/>
+  <object id="38" x="32" y="448" width="16" height="16"/>
+  <object id="39" x="48" y="448" width="16" height="16"/>
+  <object id="40" x="64" y="448" width="16" height="16"/>
+  <object id="41" x="80" y="448" width="16" height="16"/>
+  <object id="42" x="96" y="448" width="16" height="16"/>
+  <object id="43" x="112" y="448" width="16" height="16"/>
+  <object id="44" x="128" y="448" width="16" height="16"/>
+  <object id="45" x="144" y="448" width="16" height="16"/>
+  <object id="46" x="160" y="448" width="16" height="16"/>
+  <object id="47" x="176" y="448" width="16" height="16"/>
+  <object id="48" x="192" y="448" width="16" height="16"/>
+  <object id="50" x="208" y="448" width="16" height="16"/>
+  <object id="51" x="224" y="448" width="16" height="16"/>
+  <object id="52" x="240" y="448" width="16" height="16"/>
+  <object id="53" x="256" y="448" width="16" height="16"/>
+  <object id="54" x="272" y="448" width="16" height="16"/>
+  <object id="55" x="288" y="448" width="16" height="16"/>
+  <object id="56" x="304" y="448" width="16" height="16"/>
+  <object id="58" x="320" y="448" width="16" height="16"/>
+  <object id="59" x="336" y="448" width="16" height="16"/>
+  <object id="60" x="352" y="448" width="16" height="16"/>
+  <object id="61" x="368" y="448" width="16" height="16"/>
+  <object id="62" x="384" y="448" width="16" height="16"/>
+  <object id="64" x="400" y="448" width="16" height="16"/>
+  <object id="65" x="416" y="448" width="16" height="16"/>
+  <object id="66" x="432" y="448" width="16" height="16"/>
+  <object id="67" x="448" y="448" width="16" height="16"/>
+  <object id="68" x="464" y="448" width="16" height="16"/>
+  <object id="69" x="480" y="448" width="16" height="16"/>
+  <object id="70" x="496" y="448" width="16" height="16"/>
+  <object id="71" x="512" y="448" width="16" height="16"/>
+  <object id="72" x="528" y="448" width="16" height="16"/>
+  <object id="73" x="544" y="448" width="16" height="16"/>
+  <object id="75" x="560" y="448" width="16" height="16"/>
+  <object id="76" x="576" y="448" width="16" height="16"/>
+  <object id="77" x="592" y="448" width="16" height="16"/>
+  <object id="78" x="608" y="448" width="16" height="16"/>
+  <object id="79" x="624" y="448" width="16" height="16"/>
+  <object id="80" x="640" y="448" width="16" height="16"/>
+  <object id="81" x="656" y="448" width="16" height="16"/>
+  <object id="82" x="688" y="448" width="16" height="16"/>
+  <object id="83" x="672" y="448" width="16" height="16"/>
+  <object id="84" x="704" y="448" width="16" height="16"/>
+  <object id="85" x="720" y="448" width="16" height="16"/>
+  <object id="87" x="736" y="448" width="16" height="16"/>
+  <object id="105" x="752" y="448" width="16" height="16"/>
+  <object id="106" x="768" y="448" width="16" height="16"/>
+  <object id="107" x="784" y="448" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="iron">
+  <object id="3936" x="352" y="464" width="16" height="16"/>
+  <object id="3937" x="384" y="464" width="16" height="16"/>
+  <object id="3938" x="416" y="464" width="16" height="16"/>
+  <object id="3939" x="432" y="480" width="16" height="16"/>
+  <object id="3940" x="400" y="496" width="16" height="16"/>
+  <object id="3942" x="432" y="512" width="16" height="16"/>
+  <object id="3943" x="368" y="528" width="16" height="16"/>
+  <object id="3944" x="352" y="496" width="16" height="16"/>
+  <object id="3945" x="320" y="512" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="rocks">
+  <object id="243" x="32" y="416" width="64" height="32"/>
+  <object id="244" x="288" y="400" width="48" height="48"/>
+  <object id="246" x="272" y="416" width="16" height="32"/>
+  <object id="247" x="256" y="432" width="16" height="16"/>
+  <object id="248" x="336" y="416" width="16" height="32"/>
+  <object id="249" x="352" y="432" width="16" height="16"/>
+  <object id="251" x="304" y="384" width="16" height="16"/>
+  <object id="252" x="544" y="368" width="16" height="80"/>
+  <object id="253" x="592" y="368" width="16" height="80"/>
+  <object id="254" x="560" y="352" width="32" height="48"/>
+  <object id="256" x="0" y="128" width="800" height="16"/>
+ </objectgroup>
+</map>

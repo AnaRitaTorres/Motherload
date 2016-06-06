@@ -34,7 +34,7 @@ public class PlayState {
         world.setContactListener(new WorldContactListener(this));
         this.driller = new Driller(this, 40, 1200);
         this.gas_station = new GasStation(this, 9, -27);
-        this.trade_center = new TradeCenter(this, 27, -27);
+        this.trade_center = new TradeCenter(this, 34, -27);
 
     }
 
