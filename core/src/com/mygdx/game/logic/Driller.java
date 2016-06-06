@@ -267,4 +267,16 @@ public class Driller extends Sprite implements InputHandler
     public void setHealth(int health) {
         this.health = health;
     }
+
+    public void addMax_fuel(int max_fuel) {
+        this.max_fuel += max_fuel;
+    }
+
+    public void addMax_health(int max_health) {
+        this.max_health += max_health;
+    }
+
+    public void addCapacity(int capacity) {
+        this.capacity += capacity;
+    }
 }

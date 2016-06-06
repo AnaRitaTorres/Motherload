@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.World;
 /**
  * Created by Rita on 14/05/2016.
  */
-public class PlayState extends State{
+public class PlayState{
 
     private Map map;
     private World world;
@@ -27,7 +27,7 @@ public class PlayState extends State{
     public PlayState()
     {
         this.score = 0;
-        this.money = 10;
+        this.money = 500;
 
         world = new World(new Vector2(0, -10), true);
         map = new Map(this);
@@ -37,6 +37,7 @@ public class PlayState extends State{
         this.trade_center = new TradeCenter(this, 34, -27);
 
     }
+
 
     public World getWorld() {
         return world;
