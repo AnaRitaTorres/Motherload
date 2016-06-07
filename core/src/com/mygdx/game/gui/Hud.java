@@ -125,6 +125,10 @@ public class Hud {
         moneyLabel.setText(String.format(" Money: %07d ", play_state.getMoney(), label_style));
     }
 
+    public void updateViewport(int width, int height)
+    {
+        viewport.update(width, height);
+    }
     public void handleInput()
     {
         pause_button.addListener(new ChangeListener()
