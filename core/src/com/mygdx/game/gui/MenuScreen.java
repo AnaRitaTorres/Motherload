@@ -114,10 +114,12 @@ public class MenuScreen implements Screen
         exitButton.setPosition(100,0);
         stage.addActor(exitButton);
 
-        this.music = Gdx.audio.newMusic(Gdx.files.internal("Darude - Sandstorm.mp3"));
-        music.setVolume(0.5f);
-        music.setLooping(true);
-        music.play();
+        if(Motherload.music) {
+            this.music = Gdx.audio.newMusic(Gdx.files.internal("Darude - Sandstorm.mp3"));
+            music.setVolume(0.5f);
+            music.setLooping(true);
+            music.play();
+        }
 
     }
 
@@ -130,6 +132,7 @@ public class MenuScreen implements Screen
     @Override
     public void render(float delta_time)
     {
+
         Gdx.gl.glClearColor(102f/255f,51f/255f,0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -165,7 +168,8 @@ public class MenuScreen implements Screen
 
     @Override
     public void hide() {
-        music.stop();
+        if(music != null)
+            music.stop();
     }
 
     @Override
@@ -184,7 +188,6 @@ public class MenuScreen implements Screen
         {
             public void changed (ChangeEvent event, Actor actor)
             {
-                music.stop();
                 game.setScreen(new PlayScreen(game.pState, game));
             }
         });
@@ -192,13 +195,14 @@ public class MenuScreen implements Screen
         optionsButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
                 //TODO options screen
+                /*
                 music.stop();
                 music = Gdx.audio.newMusic(Gdx.files.internal("Rick Astley - Never Gonna Give You Up.mp3"));
                 music.setVolume(0.5f);
                 music.setLooping(true);
                 music.play();
-                Gdx.app.log("OPTIONS", "");
-
+                Gdx.app.log("OPTIONS", "");*/
+                game.setScreen(new OptionsMenu(game, game.pState));
 
             }
         });

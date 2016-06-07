@@ -20,12 +20,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Motherload;
 import com.mygdx.game.logic.PlayState;
-import com.mygdx.game.logic.UpgradeStore;
 
 /**
  * Created by Daniel on 07/06/2016.
  */
-public class PauseScreen  implements Screen {
+public class OptionsMenu implements Screen {
 
     public static final int BUTTON_WIDTH = 120;
     public static final int BUTTON_HEIGHT = 40;
@@ -33,35 +32,34 @@ public class PauseScreen  implements Screen {
     private Motherload game;
     private PlayState play_state;
 
-    private OrthographicCamera pauseCam;
-    private Viewport pausePort;
+    private OrthographicCamera optionsCam;
+    private Viewport optionsPort;
 
-    private TextButton resume_button;
-    private TextButton exit_button;
+    private TextButton return_button;
+    private TextButton music_button;
 
-    private Texture pause_text;
+    private Texture options_text;
 
     private Stage stage;
     private Skin skin;
 
     private Music music;
 
-
-    public PauseScreen(Motherload game, PlayState play_state)
+    public OptionsMenu(Motherload game, PlayState play_state)
     {
-        this.play_state = play_state;
         this.game = game;
+        this.play_state = play_state;
         create();
         handleInput();
     }
 
     public void create()
     {
-        pauseCam = new OrthographicCamera();
-        pausePort = new FitViewport(Motherload.V_WIDTH*2, Motherload.V_HEIGHT, pauseCam);
-        pausePort.apply();
+        optionsCam = new OrthographicCamera();
+        optionsPort = new FitViewport(Motherload.V_WIDTH, Motherload.V_HEIGHT, optionsCam);
+        optionsPort.apply();
 
-        stage = new Stage(pausePort, game.batch);
+        stage = new Stage(optionsPort, game.batch);
         Gdx.input.setInputProcessor(stage);
 
         skin = new Skin();
@@ -84,19 +82,29 @@ public class PauseScreen  implements Screen {
 
         skin.add("default", textButtonStyle);
 
-        resume_button = new TextButton("RESUME",textButtonStyle);
-        resume_button.setPosition(140, 230);
-        stage.addActor(resume_button);
+        if(Motherload.music)
+            music_button = new TextButton("MUSIC ON",textButtonStyle);
+        else
+            music_button = new TextButton("MUSIC OFF",textButtonStyle);
 
-        exit_button = new TextButton("EXIT",textButtonStyle);
-        exit_button.setPosition(140, 170);
-        stage.addActor(exit_button);
+        music_button.setPosition(140, 230);
+        stage.addActor(music_button);
 
-        pause_text = new Texture("pause.png");
-        TextureRegion region = new TextureRegion(pause_text, 0, 0, 163, 43);
+        return_button = new TextButton("RETURN",textButtonStyle);
+        return_button.setPosition(140, 170);
+        stage.addActor(return_button);
+
+        options_text = new Texture("options.png");
+        TextureRegion region = new TextureRegion(options_text, 0, 0, 177, 34);
         Image actor = new Image(region);
-        actor.setPosition(118, 300);
+        actor.setPosition(111, 300);
         stage.addActor(actor);
+
+        
+        music = Gdx.audio.newMusic(Gdx.files.internal("Rick Astley - Never Gonna Give You Up.mp3"));
+        music.setVolume(0.5f);
+        music.setLooping(true);
+        music.play();
 
 
     }
@@ -109,11 +117,18 @@ public class PauseScreen  implements Screen {
 
     @Override
     public void render(float delta) {
+
+        if(!Motherload.music && music != null)
+            music.pause();
+
+        if(Motherload.music && music != null)
+            music.play();
+
         Gdx.gl.glClearColor(0,0,0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        pauseCam.update();
-        game.batch.setProjectionMatrix(pauseCam.combined);
+        optionsCam.update();
+        game.batch.setProjectionMatrix(optionsCam.combined);
 
 
         game.batch.begin();
@@ -121,14 +136,12 @@ public class PauseScreen  implements Screen {
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
-
-
     }
 
     @Override
     public void resize(int width, int height) {
-        pausePort.update(width,height);
-        pauseCam.position.set(game.V_WIDTH,game.V_HEIGHT,0);
+        optionsPort.update(width,height);
+        optionsCam.position.set(game.V_WIDTH,game.V_HEIGHT,0);
     }
 
     @Override
@@ -143,7 +156,8 @@ public class PauseScreen  implements Screen {
 
     @Override
     public void hide() {
-
+        if(music != null)
+            music.stop();
     }
 
     @Override
@@ -153,25 +167,26 @@ public class PauseScreen  implements Screen {
 
     public void handleInput()
     {
-        resume_button.addListener(new ChangeListener()
+        music_button.addListener(new ChangeListener()
         {
-            public void changed (ChangeEvent event, Actor actor)
-            {
-                System.out.println("RESUME pause");
-                game.setScreen(new PlayScreen(play_state,game));
+            public void changed (ChangeEvent event, Actor actor) {
 
+                if (Motherload.music == true){
+                    Motherload.music = false;
+                    music_button.setText("MUSIC OFF");
+                }
+                else {
+                    Motherload.music = true;
+                    music_button.setText("MUSIC ON");
+                }
             }
         });
 
-        exit_button.addListener(new ChangeListener()
+        return_button.addListener(new ChangeListener()
         {
             public void changed (ChangeEvent event, Actor actor)
             {
-                System.out.println("EXIT pause");
-                game.pState = new PlayState(game);
                 game.setScreen(new MenuScreen(game));
-
-
             }
         });
     }

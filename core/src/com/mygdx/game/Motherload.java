@@ -23,6 +23,8 @@ public class Motherload extends Game
 	public SpriteBatch batch;
 	public PlayState pState;
 
+	public static boolean music = true;
+
 
 
 	@Override

@@ -57,10 +57,12 @@ public class PlayScreen implements Screen{
 
         this.hud = new Hud(play_state, game.batch);
 
-        this.music = Gdx.audio.newMusic(Gdx.files.internal("Motherload OST - Heavy Industry HQ.mp3"));
-        music.setVolume(0.5f);
-        music.setLooping(true);
-        music.play();
+        if(Motherload.music) {
+            this.music = Gdx.audio.newMusic(Gdx.files.internal("Motherload OST - Heavy Industry HQ.mp3"));
+            music.setVolume(0.5f);
+            music.setLooping(true);
+            music.play();
+        }
 
     }
 
@@ -146,7 +148,8 @@ public class PlayScreen implements Screen{
 
     @Override
     public void hide() {
-        music.stop();
+        if(music != null)
+            music.stop();
 
     }
 

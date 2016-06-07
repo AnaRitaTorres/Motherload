@@ -29,8 +29,6 @@ public class Driller extends Sprite implements InputHandler
     public final static int DRILL_LEFT = 5;
 
 
-    public State current_state;
-    public State previous_state;
 
     private boolean moving_right;
     private boolean drilling;
