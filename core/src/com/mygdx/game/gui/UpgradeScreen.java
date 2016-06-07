@@ -123,15 +123,15 @@ public class UpgradeScreen implements Screen {
         label_style = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
         label_style.background = new TextureRegionDrawable(new TextureRegion(texture_solid));
 
-        fuel_label = new Label(" Cost: 100 ", label_style);
+        fuel_label = new Label(" Cost: 100         ", label_style);
         fuel_label.setPosition(230,270);
         stage.addActor(fuel_label);
 
-        hull_label = new Label(" Cost: 100 ", label_style);
+        hull_label = new Label(" Cost: 100         ", label_style);
         hull_label.setPosition(50,270);
         stage.addActor(hull_label);
 
-        cargo_label = new Label(" Cost: 100 ", label_style);
+        cargo_label = new Label(" Cost: 100         ", label_style);
         cargo_label.setPosition(50,140);
         stage.addActor(cargo_label);
 

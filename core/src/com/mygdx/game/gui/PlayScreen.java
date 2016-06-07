@@ -71,6 +71,10 @@ public class PlayScreen implements Screen{
         driller.updateHealth();
         driller.updateFuel(delta_time/10);
 
+        if(play_state.checkGameOver() == true)
+            game.setScreen(new GameOverScreen(game, game.pState));
+
+
 
         gamecam.update();
         play_state.getMap().getRenderer().setView(gamecam);
@@ -105,6 +109,11 @@ public class PlayScreen implements Screen{
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+    }
+
+    public void endGame()
+    {
+        game.setScreen(new GameOverScreen(game, play_state));
     }
 
     @Override

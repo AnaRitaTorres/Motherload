@@ -44,6 +44,18 @@ public class PlayState{
 
     }
 
+    public boolean checkGameOver()
+    {
+        boolean ret = false;
+
+        if(driller.getHealth() == 0)
+            ret = true;
+
+        if(driller.getFuel() <= 0)
+            ret = true;
+
+        return ret;
+    }
 
     public World getWorld() {
         return world;

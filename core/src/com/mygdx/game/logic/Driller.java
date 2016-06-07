@@ -46,7 +46,7 @@ public class Driller extends Sprite implements InputHandler
         defineDriller(x, y);
         this.speed = 1;
         this.capacity = 5;
-        this.health = 100;
+        this.health = 90;
         this.minerals = new ArrayList<Mineral>();
         this.last_vertical_velocity = 0;
         this.max_health = 100;
