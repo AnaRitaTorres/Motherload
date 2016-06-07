@@ -97,7 +97,7 @@ public class UpgradeScreen implements Screen {
 
         skin.add("default", textButtonStyle);
 
-        //Define title button
+
         upgradeHull = new TextButton("UPGRADE HULL",textButtonStyle);
         upgradeHull.setPosition(50, 300);
         stage.addActor(upgradeHull);
@@ -197,6 +197,7 @@ public class UpgradeScreen implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
+        texture_solid.dispose();
 
     }
 

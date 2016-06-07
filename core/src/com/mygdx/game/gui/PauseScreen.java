@@ -12,58 +12,53 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Motherload;
 import com.mygdx.game.logic.PlayState;
+import com.mygdx.game.logic.UpgradeStore;
 
 /**
  * Created by Daniel on 07/06/2016.
  */
-public class GameOverScreen implements Screen{
+public class PauseScreen  implements Screen {
 
     public static final int BUTTON_WIDTH = 120;
-    public static final int BUTTON_HEIGHT = 60;
+    public static final int BUTTON_HEIGHT = 40;
 
     private Motherload game;
     private PlayState play_state;
 
-    private OrthographicCamera overCam;
-    private Viewport overPort;
+    private OrthographicCamera pauseCam;
+    private Viewport pausePort;
 
-    private TextButton return_button;
+    private TextButton resume_button;
+    private TextButton exit_button;
 
-    private Label score_label;
-    private Label money_label;
-
-    private Label.LabelStyle label_style;
-    private Texture texture_solid;
-    private Texture game_over_text;
+    private Texture pause_text;
 
     private Stage stage;
     private Skin skin;
 
-    public GameOverScreen(Motherload game, PlayState play_state)
+
+    public PauseScreen(Motherload game, PlayState play_state)
     {
-        this.game = game;
         this.play_state = play_state;
+        this.game = game;
         create();
         handleInput();
     }
 
-
-    private void create()
+    public void create()
     {
-        overCam = new  OrthographicCamera();
-        overPort = new FitViewport(Motherload.V_WIDTH*2, Motherload.V_WIDTH*2, overCam);
-        overPort.apply();
+        pauseCam = new OrthographicCamera();
+        pausePort = new FitViewport(Motherload.V_WIDTH*2, Motherload.V_HEIGHT, pauseCam);
+        pausePort.apply();
 
-        stage = new Stage(overPort, game.batch);
+        stage = new Stage(pausePort, game.batch);
         Gdx.input.setInputProcessor(stage);
 
         skin = new Skin();
@@ -75,6 +70,7 @@ public class GameOverScreen implements Screen{
         skin.add("click", new Texture(pixmap));
 
         BitmapFont bfont=new BitmapFont();
+        bfont.getData().setScale(0.7f);
         skin.add("default",bfont);
 
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
@@ -82,36 +78,26 @@ public class GameOverScreen implements Screen{
         textButtonStyle.over = skin.newDrawable("click", Color.LIGHT_GRAY);
 
         textButtonStyle.font = skin.getFont("default");
+
         skin.add("default", textButtonStyle);
 
-        //button
-        return_button = new TextButton("MAIN MENU", textButtonStyle);
-        return_button.setPosition(140, 120);
-        stage.addActor(return_button);
+        resume_button = new TextButton("RESUME",textButtonStyle);
+        resume_button.setPosition(140, 230);
+        stage.addActor(resume_button);
 
-        Pixmap pix = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        pix.setColor(0x556B2FFF);
-        pix.fill();
-        texture_solid = new Texture(pix);
+        exit_button = new TextButton("EXIT",textButtonStyle);
+        exit_button.setPosition(140, 170);
+        stage.addActor(exit_button);
 
-        label_style = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-        label_style.background = new TextureRegionDrawable(new TextureRegion(texture_solid));
-
-        score_label = new Label(String.format(" Final Score:   %09d ", play_state.score), label_style);
-        score_label.setPosition(115, 240);
-        stage.addActor(score_label);
-
-        score_label = new Label(String.format(" Final Money:  $%08d ", play_state.getMoney()), label_style);
-        score_label.setPosition(115, 290);
-        stage.addActor(score_label);
-
-        game_over_text = new Texture("game_over.png");
-        TextureRegion region = new TextureRegion(game_over_text, 0, 0, 300, 43);
+        pause_text = new Texture("pause.png");
+        TextureRegion region = new TextureRegion(pause_text, 0, 0, 163, 43);
         Image actor = new Image(region);
-        actor.setPosition(50, 360);
+        actor.setPosition(118, 300);
         stage.addActor(actor);
 
+
     }
+
 
     @Override
     public void show() {
@@ -123,8 +109,8 @@ public class GameOverScreen implements Screen{
         Gdx.gl.glClearColor(0,0,0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        overCam.update();
-        game.batch.setProjectionMatrix(overCam.combined);
+        pauseCam.update();
+        game.batch.setProjectionMatrix(pauseCam.combined);
 
 
         game.batch.begin();
@@ -138,8 +124,8 @@ public class GameOverScreen implements Screen{
 
     @Override
     public void resize(int width, int height) {
-        overPort.update(width,height);
-        overCam.position.set(game.V_WIDTH,game.V_HEIGHT,0);
+        pausePort.update(width,height);
+        pauseCam.position.set(game.V_WIDTH,game.V_HEIGHT,0);
     }
 
     @Override
@@ -159,24 +145,31 @@ public class GameOverScreen implements Screen{
 
     @Override
     public void dispose() {
-        stage.dispose();
-        skin.dispose();
-        texture_solid.dispose();
-        game_over_text.dispose();
 
     }
 
     public void handleInput()
     {
-        return_button.addListener(new ChangeListener()
+        resume_button.addListener(new ChangeListener()
         {
             public void changed (ChangeEvent event, Actor actor)
             {
-                game.pState = new PlayState(game);
-                game.setScreen(new MenuScreen(game));
+                System.out.println("RESUME pause");
+                game.setScreen(new PlayScreen(play_state,game));
 
             }
         });
 
+        exit_button.addListener(new ChangeListener()
+        {
+            public void changed (ChangeEvent event, Actor actor)
+            {
+                System.out.println("EXIT pause");
+                game.pState = new PlayState(game);
+                game.setScreen(new MenuScreen(game));
+
+
+            }
+        });
     }
 }

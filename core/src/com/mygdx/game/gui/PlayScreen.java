@@ -4,11 +4,17 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Motherload;
@@ -20,6 +26,7 @@ import com.mygdx.game.logic.PlayState;
  */
 public class PlayScreen implements Screen{
 
+
     PlayState play_state;
     Motherload game;
 
@@ -30,6 +37,8 @@ public class PlayScreen implements Screen{
     private Hud hud;
 
     private Music music;
+
+
 
     public PlayScreen(PlayState play_state, Motherload game)
     {
@@ -85,7 +94,7 @@ public class PlayScreen implements Screen{
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(null);
+        Gdx.input.setInputProcessor(hud.stage);
     }
 
     @Override
@@ -109,6 +118,9 @@ public class PlayScreen implements Screen{
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+
+
+
     }
 
     public void endGame()
