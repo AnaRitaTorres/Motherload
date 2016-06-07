@@ -21,11 +21,28 @@ import java.util.ArrayList;
  */
 public class Driller extends Sprite implements InputHandler
 {
+    public final static int DRILL_RIGHT = 0;
+    public final static int RIGHT = 1;
+    public final static int FLY_RIGHT = 2;
+    public final static int LEFT = 3;
+    public final static int FLY_LEFT = 4;
+    public final static int DRILL_LEFT = 5;
+
+
+    public State current_state;
+    public State previous_state;
+
+    private boolean moving_right;
+    private boolean drilling;
+    private long start_drilling_time;
+
     public World world;
     PlayState play_state;
     public Body b2body;
+
     private TextureRegion simple_sprite;
     private Texture driller_tex;
+    ArrayList<TextureRegion> textures;
 
     private int speed;
     private ArrayList<Mineral> minerals;
@@ -52,6 +69,14 @@ public class Driller extends Sprite implements InputHandler
         this.max_health = 100;
         this.max_fuel = 100;
         this.fuel = 50;
+
+        this.moving_right = true;
+        this.drilling = false;
+        this.start_drilling_time = 0;
+
+
+
+
     }
 
     public void defineDriller(int x, int y)
@@ -68,17 +93,22 @@ public class Driller extends Sprite implements InputHandler
         fixtureDef.filter.maskBits = Motherload.DEFAULT_BIT | Motherload.MINERAL_BIT | Motherload.ROCK_BIT;
 
         fixtureDef.shape = shape;
-        fixtureDef.restitution = 0.1f;
+        //fixtureDef.restitution = 0.1f;
         fixtureDef.friction = 30f;
         b2body.setLinearDamping(1.5f);
 
         b2body.createFixture(fixtureDef).setUserData("driller");
 
 
-        driller_tex = new Texture("motherload_sprites/ground_right.png");
-        simple_sprite = new TextureRegion(driller_tex, 90, 60);
+        driller_tex = new Texture("motherload_sprites/driller_sprites_line.png");
+        textures = new ArrayList<TextureRegion>();
+
+        for(int i = 0; i < 6; i++)
+            textures.add(new TextureRegion(driller_tex, 90*i, 0, 90, 65));
+
+
         setBounds(0, 0, 24/Motherload.PPM, 16/Motherload.PPM);
-        setRegion(simple_sprite);
+        setRegion(textures.get(FLY_LEFT));
 
 
         //colision sensors
@@ -122,8 +152,42 @@ public class Driller extends Sprite implements InputHandler
         return v;
     }
 
-    public void updateTexture() {
+    public void updateTexture(float delta_time) {
+
+        if(System.currentTimeMillis() - start_drilling_time > 300)
+        {
+            start_drilling_time = 0;
+            drilling = false;
+        }
+
+
+
+        if(b2body.getLinearVelocity().x < 0)
+            this.moving_right = false;
+        if(b2body.getLinearVelocity().x > 0)
+            this.moving_right = true;
+
+        if(moving_right == true) {
+            if (play_state.bottom_contact != null)
+                setRegion(textures.get(RIGHT));
+            if (play_state.bottom_contact == null)
+                setRegion(textures.get(FLY_RIGHT));
+            if(drilling == true)
+                setRegion(textures.get(DRILL_RIGHT));
+        }
+        else {
+            if (play_state.bottom_contact != null)
+                setRegion(textures.get(LEFT));
+            if (play_state.bottom_contact == null)
+                setRegion(textures.get(FLY_LEFT));
+            if(drilling == true)
+                setRegion(textures.get(DRILL_LEFT));
+
+        }
+
+
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+
     }
 
 
@@ -146,6 +210,8 @@ public class Driller extends Sprite implements InputHandler
                 {
                     Gdx.app.log("bottom", "");
                     play_state.bottom_contact.drill();
+                    drilling = true;
+                    start_drilling_time = System.currentTimeMillis();
                     decreaseFuel();
                 }
 

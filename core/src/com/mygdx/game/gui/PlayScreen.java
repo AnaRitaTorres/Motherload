@@ -73,7 +73,7 @@ public class PlayScreen implements Screen{
         gamecam.position.y = driller.b2body.getPosition().y;
 
         //update driller texture
-        driller.updateTexture();
+        driller.updateTexture(delta_time);
 
         //update driller status
         driller.updateMove(delta_time);
