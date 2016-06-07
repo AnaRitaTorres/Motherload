@@ -7,11 +7,10 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
+
 /**
- * Created by Rita on 14/05/2016.
+ * The Gas Station class
  */
-
-
 public class GasStation
 {
     public static final int FUEL_PRICE = 1;
@@ -20,7 +19,12 @@ public class GasStation
     PlayState play_state;
     World world;
 
-
+    /**
+     * Instantiates a new Gas Station
+     * @param play_state current playState
+     * @param x x position of gas station
+     * @param y y position of gas station
+     */
     public GasStation(PlayState play_state, int x, int y)
     {
         this.play_state = play_state;
@@ -28,6 +32,11 @@ public class GasStation
         create(x,y);
     }
 
+    /**
+     * defines all the attributes of the gas station
+     * @param x x position of gas station
+     * @param y y position of gas station
+     */
     private void create(int x, int y)
     {
 
@@ -50,6 +59,10 @@ public class GasStation
 
     }
 
+    /**
+     * trades the player money for health and fuel
+     * @param driller driller currently in the play State
+     */
     public void shop(Driller driller)
     {
         int fuel = (int)Math.ceil(driller.getFuel());

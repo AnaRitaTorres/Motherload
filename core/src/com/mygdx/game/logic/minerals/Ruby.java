@@ -7,10 +7,16 @@ import com.mygdx.game.logic.Mineral;
 import com.mygdx.game.logic.PlayState;
 
 /**
- * Created by Rita on 03/06/2016.
+ * The Ruby class
  */
 public class Ruby extends Mineral
 {
+    /**
+     * Instantiates a new Mineral with the properties of Ruby
+     * @param play_state current PlayState
+     * @param map game map
+     * @param object object from map
+     */
     public Ruby(PlayState play_state, Map map, MapObject object)
     {
         super(play_state, map, object,80, 20000,0);

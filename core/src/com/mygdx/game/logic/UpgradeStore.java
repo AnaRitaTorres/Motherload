@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
- * Created by Daniel on 06/06/2016.
+ * The Upgrade Store class
  */
 public class UpgradeStore {
 
@@ -19,6 +19,12 @@ public class UpgradeStore {
     private PlayState play_state;
     private World world;
 
+    /**
+     * Instantiates a new Upgrade Store
+     * @param play_state current PlayState
+     * @param x x position of upgrade store
+     * @param y y position of upgrade store
+     */
     public UpgradeStore(PlayState play_state, int x, int y)
     {
         this.play_state = play_state;
@@ -26,6 +32,11 @@ public class UpgradeStore {
         defineUpgradeStore(x, y);
     }
 
+    /**
+     * defines all the attributes of the upgrade store
+     * @param x x position of upgrade store
+     * @param y y position of upgrade store
+     */
     public void defineUpgradeStore(int x, int y)
     {
         BodyDef bdef = new BodyDef();
@@ -45,6 +56,9 @@ public class UpgradeStore {
         body.createFixture(fdef).setUserData("upgrade_store");
     }
 
+    /**
+     * trades player money for an upgrade to the hull(more health)
+     */
     public void buyHullUpgrade()
     {
         if(play_state.getMoney() >= hull_upgrade_cost) {
@@ -55,6 +69,9 @@ public class UpgradeStore {
         }
     }
 
+    /**
+     * trades player money for an upgrade to the cargo bay (more capacity)
+     */
     public void buyCargoUpgrades()
     {
         if(play_state.getMoney() >= cargo_upgrade_cost) {
@@ -64,6 +81,9 @@ public class UpgradeStore {
         }
     }
 
+    /**
+     * trades player money for an upgrade to the fuel tank (more fuel capacity)
+     */
     public void buyFuelUpgrades()
     {
         if(play_state.getMoney() >= fuel_upgrade_cost) {
@@ -73,14 +93,26 @@ public class UpgradeStore {
         }
     }
 
+    /**
+     * return hull upgrade cost
+     * @return hull upgrade cost
+     */
     public int getHull_upgrade_cost() {
         return hull_upgrade_cost;
     }
 
+    /**
+     * return cargo upgrade cost
+     * @return cargo upgrade cost
+     */
     public int getCargo_upgrade_cost() {
         return cargo_upgrade_cost;
     }
 
+    /**
+     * return fuel tank upgrade cost
+     * @return fuel tank upgrade cost
+     */
     public int getFuel_upgrade_cost() {
         return fuel_upgrade_cost;
     }

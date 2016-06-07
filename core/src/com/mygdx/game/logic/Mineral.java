@@ -15,7 +15,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Motherload;
 
 /**
- * Created by Rita on 14/05/2016.
+ * The Mineral class
  */
 public abstract class Mineral {
 
@@ -32,7 +32,15 @@ public abstract class Mineral {
     protected PlayState play_state;
 
 
-
+    /**
+     * Instantiates a new Driller
+     * @param play_state current PlayState
+     * @param map map where the mineral will stay
+     * @param object object from the maploader
+     * @param weight weight of the mineral
+     * @param value value of the mineral
+     * @param points points given to player after drilling mineral
+     */
     public Mineral(PlayState play_state, Map map, MapObject object, int weight, int value, int points) {
         this.weight = weight;
         this.value = value;
@@ -60,8 +68,15 @@ public abstract class Mineral {
         fixture = body.createFixture(fdef);
     }
 
+    /**
+     * what to do after a mineral is drilled
+     */
     public abstract void drill();
-    
+
+    /**
+     * set the filter of collisions of the object
+     * @param filterBit bits containing the filter collision data
+     */
     public void setCategoryFilter(short filterBit)
     {
         Filter filter = new Filter();
@@ -69,6 +84,10 @@ public abstract class Mineral {
         fixture.setFilterData(filter);
     }
 
+    /**
+     * returns the position of the mineral relative to the tilemap
+     * @return position of the mineral in the tilemap
+     */
     public TiledMapTileLayer.Cell getCell()
     {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getMap().getLayers().get(1);

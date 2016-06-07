@@ -7,10 +7,16 @@ import com.mygdx.game.logic.Mineral;
 import com.mygdx.game.logic.PlayState;
 
 /**
- * Created by Rita on 03/06/2016.
+ * The Bronzium class
  */
 public class Bronzium extends Mineral
 {
+    /**
+     * Instantiates a new Mineral with the properties of Bronzium
+     * @param play_state current PlayState
+     * @param map game map
+     * @param object object from map
+     */
     public Bronzium(PlayState play_state, Map map, MapObject object) {
         super(play_state, map, object, 10, 30, 150);
         fixture.setUserData(this);

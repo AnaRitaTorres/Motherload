@@ -7,10 +7,17 @@ import com.mygdx.game.logic.Mineral;
 import com.mygdx.game.logic.PlayState;
 
 /**
- * Created by Rita on 03/06/2016.
+ * The Ironium class
  */
 public class Ironium extends Mineral
 {
+
+    /**
+     * Instantiates a new Mineral with the properties of Ironium
+     * @param play_state current PlayState
+     * @param map game map
+     * @param object object from map
+     */
     public Ironium(PlayState play_state, Map map, MapObject object)
     {
         super(play_state, map, object, 10, 30, 150);

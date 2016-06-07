@@ -7,6 +7,9 @@ import com.mygdx.game.gui.MenuScreen;
 import com.mygdx.game.logic.PlayState;
 import com.mygdx.game.logic.UpgradeStore;
 
+/**
+ * The Motherload class
+ */
 public class Motherload extends Game
 {
 	public static final int V_WIDTH = 400/2;
@@ -26,7 +29,9 @@ public class Motherload extends Game
 	public static boolean music = true;
 
 
-
+	/**
+	 * Creates a new game
+	 */
 	@Override
 	public void create ()
 	{

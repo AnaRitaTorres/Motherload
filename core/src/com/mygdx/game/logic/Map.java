@@ -23,13 +23,11 @@ import com.mygdx.game.logic.minerals.Platinium;
 import com.mygdx.game.logic.minerals.Ruby;
 import com.mygdx.game.logic.minerals.Silverium;
 
+
 /**
- * Created by Rita on 17/05/2016.
+ * The Map Class
  */
-
 public class Map
-
-
 {
     private TmxMapLoader maploader;
     private TiledMap map;
@@ -37,6 +35,10 @@ public class Map
 
     private World world;
 
+    /**
+     * Instantiates a new Map
+     * @param play_state current PlayState
+     */
     public Map(PlayState play_state)
     {
         maploader = new TmxMapLoader();
@@ -110,14 +112,26 @@ public class Map
 
     }
 
+    /**
+     * returns the orthogonal tiled map render
+     * @return the tiled map renderer
+     */
     public OrthogonalTiledMapRenderer getRenderer() {
         return renderer;
     }
 
+    /**
+     * returns the map world
+     * @return map world
+     */
     public World getWorld() {
         return world;
     }
 
+    /**
+     * returns the map tileMap
+     * @return the map tileMap
+     */
     public TiledMap getMap() {
         return map;
     }

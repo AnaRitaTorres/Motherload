@@ -6,7 +6,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.Motherload;
 
 /**
- * Created by Rita on 14/05/2016.
+ * The PlayState class
  */
 public class PlayState{
 
@@ -26,7 +26,10 @@ public class PlayState{
     public int score;
     private int money;
 
-
+    /**
+     * Instantiates a new PlayState
+     * @param game Motherload
+     */
     public PlayState(Motherload game)
     {
         this.game = game;
@@ -44,6 +47,10 @@ public class PlayState{
 
     }
 
+    /**
+     * checks if the game is over
+     * @return true if game is over, false is game is not over
+     */
     public boolean checkGameOver()
     {
         boolean ret = false;
@@ -57,42 +64,82 @@ public class PlayState{
         return ret;
     }
 
+    /**
+     * return game world
+     * @return game world
+     */
     public World getWorld() {
         return world;
     }
 
+    /**
+     * return game map
+     * @return game map
+     */
     public Map getMap() {
         return map;
     }
 
+    /**
+     * return PlayState driller
+     * @return PlayState driller
+     */
     public Driller getDriller() {
         return driller;
     }
 
+    /**
+     * return game score
+     * @return game score
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * return player money
+     * @return player money
+     */
     public int getMoney() {
         return money;
     }
 
+    /**
+     * return game trade center
+     * @return game trade center
+     */
     public TradeCenter getTrade_center() {
         return trade_center;
     }
 
+    /**
+     * return game gas station
+     * @return game gas station
+     */
     public GasStation getGas_station() {
         return gas_station;
     }
 
+    /**
+     * updates player money value
+     * @param money players new money value
+     */
     public void setMoney(int money) {
         this.money = money;
     }
 
+    /**
+     * return upgrade store
+     * @return game upgrade store
+     */
     public UpgradeStore getUpgrade_store() {
         return upgrade_store;
     }
 
+    /**
+     * return game
+     * @return game
+     */
     public Motherload getGame() {
         return game;
     }

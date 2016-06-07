@@ -17,7 +17,9 @@ import com.mygdx.game.gui.InputHandler;
 import java.util.ArrayList;
 
 /**
- * Created by Rita on 14/05/2016.
+ * The Driller Class
+ * extends the Sprite Class
+ * implements InputHandler
  */
 public class Driller extends Sprite implements InputHandler
 {
@@ -53,7 +55,12 @@ public class Driller extends Sprite implements InputHandler
 
     private float last_vertical_velocity;
 
-
+    /**
+     * Instantiates a new Driller
+     * @param play_state current PlayState
+     * @param x x position of driller
+     * @param y y position of driller
+     */
     public Driller(PlayState play_state, int x, int y)
     {
         this.play_state = play_state;
@@ -77,6 +84,11 @@ public class Driller extends Sprite implements InputHandler
 
     }
 
+    /**
+     * defines all the attributes of the driller
+     * @param x x Position of driller
+     * @param y y Position of driller
+     */
     public void defineDriller(int x, int y)
     {
         BodyDef bodyDef = new BodyDef();
@@ -131,6 +143,10 @@ public class Driller extends Sprite implements InputHandler
 
     }
 
+    /**
+     * Reads a isTouched event, and returns its data
+     * @return vector2 with the position of where the screen is touched
+     */
     public Vector2 inputHandler()
     {
         Vector2 v;
@@ -150,6 +166,10 @@ public class Driller extends Sprite implements InputHandler
         return v;
     }
 
+    /**
+     * Updates the driller texture, depending on the driller condition
+     * @param delta_time the time in seconds since the last render
+     */
     public void updateTexture(float delta_time) {
 
         if(System.currentTimeMillis() - start_drilling_time > 300)
@@ -188,7 +208,10 @@ public class Driller extends Sprite implements InputHandler
 
     }
 
-
+    /**
+     * updates the velocity of the driller, depending on the input
+     * @param delta_time the time in seconds since the last render
+     */
     public void updateMove(float delta_time)
     {
         Vector2 input = inputHandler();
@@ -242,12 +265,19 @@ public class Driller extends Sprite implements InputHandler
 
     }
 
+    /**
+     * if there is space, adds a mineral to the minerals ArrayList
+     * @param mineral mineral to be added to the minerals ArrayList
+     */
     public void addMineral(Mineral mineral)
     {
         if(minerals.size() < capacity)
             minerals.add(mineral);
     }
 
+    /**
+     * update driller health. if impact with ground is too strong, lose health
+     */
     public void updateHealth()
     {
         float current_vertical_velocity = b2body.getLinearVelocity().y;
@@ -265,6 +295,10 @@ public class Driller extends Sprite implements InputHandler
 
     }
 
+    /**
+     * reduces the driller health a certain amount
+     * @param lost_health health to decrease
+     */
     public void decreaseHealth(int lost_health)
     {
         health = health - lost_health;
@@ -273,62 +307,115 @@ public class Driller extends Sprite implements InputHandler
             health = 0;
     }
 
+    /**
+     * reduces the driller fuel everytime the playScreen renders
+     * @param delta_time the time in seconds since the last render
+     */
     public void updateFuel(float delta_time)
     {
         setFuel(getFuel() - delta_time);
     }
 
+    /**
+     * removes all minerals from container
+     */
     public void clearMinerals()
     {
         minerals.clear();
     }
 
+    /**
+     * decreases fuel by 0.1 units
+     */
     public void decreaseFuel()
     {
         fuel = fuel - 0.1f;
     }
 
-
+    /**
+     * returns the driller's maximum fuel
+     * @return driller's maximum fuel
+     */
     public int getMax_fuel() {
         return max_fuel;
     }
 
+    /**
+     * returns driller's current fuel
+     * @return driller´s fuel
+     */
     public float getFuel() {
         return fuel;
     }
 
+    /**
+     * returns driller's maximum health
+     * @return driller's maximum health
+     */
     public int getMax_health() {
         return max_health;
     }
 
+    /**
+     * returns driller's current health
+     * @return driller's current health
+     */
     public int getHealth() {
         return health;
     }
 
+    /**
+     * returns driller's capacity
+     * @return driller's capacity
+     */
     public int getCapacity() {
         return capacity;
     }
 
+    /**
+     * returns the ArrayList containin the minerals transported by the driller
+     * @return ArrayList with minerals stored in driller
+     */
     public ArrayList<Mineral> getMinerals() {
         return minerals;
     }
 
+    /**
+     * set the fuel value to the new value
+     * @param fuel new fuel value
+     */
     public void setFuel(float fuel) {
         this.fuel = fuel;
     }
 
+    /**
+     * set the health value to the new value
+     * @param health new health value
+     */
     public void setHealth(int health) {
         this.health = health;
     }
 
+    /**
+     * upgrade fuel capacity of the driller
+     * @param max_fuel upgrade value
+     */
     public void addMax_fuel(int max_fuel) {
         this.max_fuel += max_fuel;
     }
 
+    /**
+     * upgrade maximum health of the driller
+     * @param max_health upgrade value
+     */
     public void addMax_health(int max_health) {
         this.max_health += max_health;
     }
 
+    /**
+     * upgrade maximum capacity of the driller
+     * @param capacity upgrade value
+     */
     public void addCapacity(int capacity) {
         this.capacity += capacity;
     }

@@ -196,7 +196,6 @@ public class MenuScreen implements Screen
             public void changed (ChangeEvent event, Actor actor) {
 
                 game.setScreen(new OptionsMenu(game, game.pState));
-
             }
         });
 

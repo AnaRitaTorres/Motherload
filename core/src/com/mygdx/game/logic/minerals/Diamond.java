@@ -7,10 +7,16 @@ import com.mygdx.game.logic.Mineral;
 import com.mygdx.game.logic.PlayState;
 
 /**
- * Created by Rita on 03/06/2016.
+ * The Diamond class
  */
 public class Diamond  extends Mineral
 {
+    /**
+     * Instantiates a new Mineral with the properties of Diamond
+     * @param play_state current PlayState
+     * @param map game map
+     * @param object object from map
+     */
     public Diamond(PlayState play_state,Map map, MapObject object)
     {
         super(play_state, map, object,80,20000, 0);

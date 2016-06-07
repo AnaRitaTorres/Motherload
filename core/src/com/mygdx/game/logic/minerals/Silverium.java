@@ -7,11 +7,17 @@ import com.mygdx.game.logic.Mineral;
 import com.mygdx.game.logic.PlayState;
 
 /**
- * Created by Rita on 03/06/2016.
+ * The Silverium class
  */
 public class Silverium extends Mineral
 {
 
+    /**
+     * Instantiates a new Mineral with the properties of Silverium
+     * @param play_state current PlayState
+     * @param map game map
+     * @param object object from map
+     */
     public Silverium(PlayState play_state, Map map, MapObject object)
     {
         super(play_state, map, object, 10,100, 500);

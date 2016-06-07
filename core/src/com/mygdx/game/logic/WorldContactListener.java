@@ -11,13 +11,19 @@ import com.mygdx.game.gui.UpgradeScreen;
 
 
 /**
- * Created by Daniel on 02/06/2016.
+ * The WorldContactListener
+ * detects object collision of driller with minerals and stores
  */
 public class WorldContactListener implements ContactListener {
 
     PlayState play_state;
     Motherload game;
 
+    /**
+     * Instantiates a new WorldContactListener
+     * @param play_state current PlayState
+     * @param game Motherload game
+     */
     public WorldContactListener(PlayState play_state, Motherload game)
     {
         this.play_state = play_state;

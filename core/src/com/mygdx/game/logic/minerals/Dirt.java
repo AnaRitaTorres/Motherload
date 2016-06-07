@@ -8,10 +8,16 @@ import com.mygdx.game.logic.Mineral;
 import com.mygdx.game.logic.PlayState;
 
 /**
- * Created by Daniel on 02/06/2016.
+ * The Dirt class
  */
 public class Dirt extends Mineral {
 
+    /**
+     * Instantiates a new Mineral with the properties of Dirt
+     * @param play_state current PlayState
+     * @param map game map
+     * @param object object from map
+     */
     public Dirt(PlayState play_state,Map map, MapObject object) {
         super(play_state, map, object, 1, 0, 25);
         fixture.setUserData(this);
