@@ -157,7 +157,6 @@ public class PauseScreen  implements Screen {
         {
             public void changed (ChangeEvent event, Actor actor)
             {
-                System.out.println("RESUME pause");
                 game.setScreen(new PlayScreen(play_state,game));
 
             }
@@ -167,7 +166,6 @@ public class PauseScreen  implements Screen {
         {
             public void changed (ChangeEvent event, Actor actor)
             {
-                System.out.println("EXIT pause");
                 game.pState = new PlayState(game);
                 game.setScreen(new MenuScreen(game));
 

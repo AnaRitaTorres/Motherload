@@ -206,7 +206,6 @@ public class Driller extends Sprite implements InputHandler
             if(b2body.getLinearVelocity().x == 0 && b2body.getLinearVelocity().y == 0 )
                 if(play_state.bottom_contact != null)
                 {
-                    Gdx.app.log("bottom", "");
                     play_state.bottom_contact.drill();
                     drilling = true;
                     start_drilling_time = System.currentTimeMillis();
@@ -217,7 +216,6 @@ public class Driller extends Sprite implements InputHandler
             if(b2body.getLinearVelocity().x == 0 && b2body.getLinearVelocity().y == 0 )
                 if(play_state.right_contact != null && play_state.bottom_contact != null)
                 {
-                    Gdx.app.log("right", "");
                     play_state.right_contact.drill();
                     decreaseFuel();
                 }
@@ -226,7 +224,6 @@ public class Driller extends Sprite implements InputHandler
             if(b2body.getLinearVelocity().x == 0 && b2body.getLinearVelocity().y == 0 )
                 if(play_state.left_contact != null && play_state.bottom_contact != null)
                 {
-                    Gdx.app.log("left", "");
                     play_state.left_contact.drill();
                     decreaseFuel();
                 }
@@ -249,9 +246,6 @@ public class Driller extends Sprite implements InputHandler
     {
         if(minerals.size() < capacity)
             minerals.add(mineral);
-        System.out.print("minerals count: ");
-        System.out.print(minerals.size());
-        System.out.print("\n");
     }
 
     public void updateHealth()
@@ -265,11 +259,6 @@ public class Driller extends Sprite implements InputHandler
 
             if(health < 0)
                 health = 0;
-
-            System.out.print("health:");
-            System.out.print(health);
-            System.out.print("\n");
-
 
         }
         last_vertical_velocity = current_vertical_velocity;

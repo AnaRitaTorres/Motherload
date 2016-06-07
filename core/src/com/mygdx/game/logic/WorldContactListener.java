@@ -74,7 +74,6 @@ public class WorldContactListener implements ContactListener {
             if(object.getUserData() == "gas_station")
             {
                 play_state.getGas_station().shop(play_state.getDriller());
-                Gdx.app.log("Collision", "Gas Station with driller");
             }
         }
 
@@ -86,7 +85,6 @@ public class WorldContactListener implements ContactListener {
             if(object.getUserData() == "trade_center")
             {
                 play_state.getTrade_center().shop(play_state.getDriller());
-                Gdx.app.log("Collision", "Trade Center with driller");
             }
         }
 
@@ -98,7 +96,6 @@ public class WorldContactListener implements ContactListener {
             if(object.getUserData() == "upgrade_store")
             {
                 game.setScreen(new UpgradeScreen(game, play_state, play_state.getUpgrade_store()));
-                Gdx.app.log("Collision", "Upgrade Store with driller");
             }
         }
 

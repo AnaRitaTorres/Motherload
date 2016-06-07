@@ -4,7 +4,6 @@ import com.badlogic.gdx.maps.MapObject;
 import com.mygdx.game.Motherload;
 import com.mygdx.game.logic.Map;
 import com.mygdx.game.logic.Mineral;
-import com.mygdx.game.logic.MineralType;
 import com.mygdx.game.logic.PlayState;
 
 /**
@@ -14,7 +13,7 @@ public class Platinium extends Mineral
 {
     public Platinium(PlayState play_state, Map map, MapObject object)
     {
-        super(play_state, map, object, 30, 750, 3750, MineralType.PLATINIUM);
+        super(play_state, map, object, 30, 750, 3750);
         fixture.setUserData(this);
         setCategoryFilter(Motherload.MINERAL_BIT);
     }

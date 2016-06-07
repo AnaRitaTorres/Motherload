@@ -22,7 +22,6 @@ public abstract class Mineral {
     protected int weight;
     protected int value;
     protected int points;
-    protected MineralType mineral_type;
 
     protected World world;
     protected Rectangle bounds;
@@ -34,11 +33,10 @@ public abstract class Mineral {
 
 
 
-    public Mineral(PlayState play_state, Map map, MapObject object, int weight, int value, int points, MineralType mineral_type) {
+    public Mineral(PlayState play_state, Map map, MapObject object, int weight, int value, int points) {
         this.weight = weight;
         this.value = value;
         this.points = points;
-        this.mineral_type = mineral_type;
 
         this.play_state = play_state;
         this.map = map;

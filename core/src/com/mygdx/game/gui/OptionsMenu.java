@@ -100,7 +100,7 @@ public class OptionsMenu implements Screen {
         actor.setPosition(111, 300);
         stage.addActor(actor);
 
-        
+
         music = Gdx.audio.newMusic(Gdx.files.internal("Rick Astley - Never Gonna Give You Up.mp3"));
         music.setVolume(0.5f);
         music.setLooping(true);

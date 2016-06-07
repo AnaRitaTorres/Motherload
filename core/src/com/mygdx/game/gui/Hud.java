@@ -135,8 +135,6 @@ public class Hud {
         {
             public void changed (ChangeEvent event, Actor actor)
             {
-
-                System.out.println("Pause");
                 play_state.getGame().setScreen(new PauseScreen(play_state.getGame(), play_state));
 
             }
